@@ -1,0 +1,66 @@
+
+     [
+      {
+        "category": "Breakfast",
+        "title": "Pancakes",
+        "image": "https://i.ibb.co/54ZtYnK/461.jpg",
+        "rating": 4.5,
+        "price": 5.99
+      },
+      {
+        "category": "Breakfast",
+        "title": "Omelette",
+        "image": "https://i.ibb.co/0FXC0yb/2147862974.jpg",
+        "rating": 4.7,
+        "price": 6.99
+      },
+      {
+        "category": "Breakfast",
+        "title": "French Toast",
+        "image": "https://i.ibb.co/PcJq3f2/ALR-recipe-16895-fluffy-french-toast-hero-01-ddmfs-4x3-7fd61e054f2c4f0f868b7ab0dd8767ae.webp",
+        "rating": 4.6,
+        "price": 5.49
+      },
+      {
+        "category": "Lunch",
+        "title": "Grilled Chicken Salad",
+        "image": "https://i.ibb.co/s9VQdY9/66214.jpg",
+        "rating": 4.8,
+        "price": 8.99
+      },
+      {
+        "category": "Lunch",
+        "title": "Sandwich",
+        "image": "https://i.ibb.co/Xb65YMG/42571.jpg",
+        "rating": 4.4,
+        "price": 7.99
+      },
+      {
+        "category": "Lunch",
+        "title": "Veggie Wrap",
+        "image": "https://i.ibb.co/mDZMLpZ/47.jpg",
+        "rating": 4.6,
+        "price": 6.49
+      },{
+        "category": "Dinner",
+        "title": "Steak",
+        "image": "https://i.ibb.co/W2mv7Z2/44344.jpg",
+        "rating": 4.9,
+        "price": 15.99
+      },
+      {
+        "category": "Dinner",
+        "title": "Spaghetti Bolognese",
+        "image": "https://i.ibb.co/183tGMB/22960.jpg",
+        "rating": 4.7,
+        "price": 12.99
+      },
+      {
+        "category": "Dinner",
+        "title": "Grilled Salmon",
+        "image": "https://i.ibb.co/pKBJ80L/freepik-export-20240602102444it-Ek.jpg",
+        "rating": 4.8,
+        "price": 14.49
+      }
+    ]
+  
