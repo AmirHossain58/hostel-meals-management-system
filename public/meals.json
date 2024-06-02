@@ -5,62 +5,89 @@
         "title": "Pancakes",
         "image": "https://i.ibb.co/54ZtYnK/461.jpg",
         "rating": 4.5,
-        "price": 5.99
+        "price": 5.99,
+        "description": "Fluffy pancakes served with syrup and butter.",
+        "ingredients": ["Flour", "Milk", "Eggs", "Baking Powder", "Sugar", "Butter", "Syrup"],
+        "postTime": "2024-05-31T08:00:00Z"
       },
       {
         "category": "Breakfast",
         "title": "Omelette",
         "image": "https://i.ibb.co/0FXC0yb/2147862974.jpg",
         "rating": 4.7,
-        "price": 6.99
+        "price": 6.99,
+        "description": "A classic omelette with cheese and ham.",
+        "ingredients": ["Eggs", "Cheese", "Ham", "Salt", "Pepper"],
+        "postTime": "2024-05-31T08:15:00Z"
       },
       {
         "category": "Breakfast",
         "title": "French Toast",
         "image": "https://i.ibb.co/PcJq3f2/ALR-recipe-16895-fluffy-french-toast-hero-01-ddmfs-4x3-7fd61e054f2c4f0f868b7ab0dd8767ae.webp",
         "rating": 4.6,
-        "price": 5.49
+        "price": 5.49,
+        "description": "Golden brown French toast with a hint of cinnamon.",
+        "ingredients": ["Bread", "Eggs", "Milk", "Cinnamon", "Vanilla Extract", "Butter"],
+        "postTime": "2024-05-31T08:30:00Z"
       },
       {
         "category": "Lunch",
         "title": "Grilled Chicken Salad",
         "image": "https://i.ibb.co/s9VQdY9/66214.jpg",
         "rating": 4.8,
-        "price": 8.99
+        "price": 8.99,
+        "description": "Fresh salad with grilled chicken, lettuce, tomatoes, and dressing.",
+        "ingredients": ["Chicken Breast", "Lettuce", "Tomatoes", "Cucumbers", "Salad Dressing"],
+        "postTime": "2024-05-31T12:00:00Z"
       },
       {
         "category": "Lunch",
-        "title": "Sandwich",
+        "title": "Turkey Sandwich",
         "image": "https://i.ibb.co/Xb65YMG/42571.jpg",
         "rating": 4.4,
-        "price": 7.99
+        "price": 7.99,
+        "description": "Turkey sandwich with lettuce, tomato, and mayo on whole grain bread.",
+        "ingredients": ["Turkey Breast", "Lettuce", "Tomato", "Mayonnaise", "Whole Grain Bread"],
+        "postTime": "2024-05-31T12:15:00Z"
       },
       {
         "category": "Lunch",
         "title": "Veggie Wrap",
         "image": "https://i.ibb.co/mDZMLpZ/47.jpg",
         "rating": 4.6,
-        "price": 6.49
+        "price": 6.49,
+        "description": "A healthy veggie wrap with hummus, cucumbers, and carrots.",
+        "ingredients": ["Tortilla", "Hummus", "Cucumbers", "Carrots", "Lettuce"],
+        "postTime": "2024-05-31T12:30:00Z"
       },{
         "category": "Dinner",
         "title": "Steak",
         "image": "https://i.ibb.co/W2mv7Z2/44344.jpg",
         "rating": 4.9,
-        "price": 15.99
+        "price": 15.99,
+        "description": "Juicy steak grilled to perfection, served with mashed potatoes.",
+        "ingredients": ["Steak", "Salt", "Pepper", "Garlic", "Mashed Potatoes"],
+        "postTime": "2024-05-31T18:00:00Z"
       },
       {
         "category": "Dinner",
         "title": "Spaghetti Bolognese",
         "image": "https://i.ibb.co/183tGMB/22960.jpg",
         "rating": 4.7,
-        "price": 12.99
+        "price": 12.99,
+        "description": "Classic spaghetti with a rich and savory Bolognese sauce.",
+        "ingredients": ["Spaghetti", "Ground Beef", "Tomato Sauce", "Onions", "Garlic", "Olive Oil"],
+        "postTime": "2024-05-31T18:15:00Z"
       },
       {
         "category": "Dinner",
         "title": "Grilled Salmon",
         "image": "https://i.ibb.co/pKBJ80L/freepik-export-20240602102444it-Ek.jpg",
         "rating": 4.8,
-        "price": 14.49
+        "price": 14.49,
+        "description": "Grilled salmon served with a side of vegetables and lemon.",
+        "ingredients": ["Salmon", "Olive Oil", "Lemon", "Salt", "Pepper", "Mixed Vegetables"],
+        "postTime": "2024-05-31T18:30:00Z"
       }
     ]
   

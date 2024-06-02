@@ -4,8 +4,8 @@ import Home from '../pages/Home/Home'
 import ErrorPage from '../pages/ErrorPage'
 import Login from '../pages/Login/Login'
 import SignUp from '../pages/SignUp/SignUp'
-import RoomDetails from '../pages/RoomDetails/RoomDetails'
-import Categories from './../components/Categories/Categories';
+import AllMeals from '../pages/Meals/AllMeals'
+import MealsDetails from '../pages/MealsDetails/MealsDetails'
 
 export const router = createBrowserRouter([
   {
@@ -18,12 +18,12 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/room/:id',
-        element: <RoomDetails />,
+        path: '/meals/:id',
+        element: <MealsDetails />,
       },
       {
         path: '/meals',
-        element: <Categories />,
+        element: <AllMeals/>,
       },
     ],
   },
