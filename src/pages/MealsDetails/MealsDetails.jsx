@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
+import Testimonials from "./Testimonials";
 
 const MealsDetails = () => {
   const { id } = useParams();
@@ -29,8 +30,8 @@ const MealsDetails = () => {
           {/* Header */}
           <div className="flex flex-col gap-6">
             <div>
-              <Heading title={meal.title} subtitle={meal.location} />
-              <div className="w-full md:h-[60vh] overflow-hidden rounded-xl">
+              <Heading title={`Category: ${meal?.category}: ${meal?.title}`}/>
+              <div className="w-full md:h-[60vh] overflow-hidden  rounded-xl">
                 <img
                   className="object-cover w-full"
                   src={meal.image}
@@ -53,14 +54,14 @@ const MealsDetails = () => {
                 gap-2
               "
                 >
-                  <div>Hosted by {meal?.host?.name}</div>
+                  <div>Admin: {meal?.admin?.name}</div>
 
                   <img
-                    className="rounded-full"
-                    height="30"
+                    className="rounded-full  overflow-hidden"
+                    height=""
                     width="30"
                     alt="Avatar"
-                    src={meal?.host?.image}
+                    src={meal?.admin?.image}
                   />
                 </div>
                 <div
@@ -73,9 +74,7 @@ const MealsDetails = () => {
                 text-neutral-500
               "
                 >
-                  <div>{meal?.guests} guests</div>
-                  <div>{meal?.bedrooms} rooms</div>
-                  <div>{meal?.bathrooms} bathrooms</div>
+                 Ingredients: {meal?.ingredients?.map((data,i)=><div key={i}>{data} </div>)} 
                 </div>
               </div>
 
@@ -87,11 +86,12 @@ const MealsDetails = () => {
                 {meal?.description}
               </div>
               <hr />
+              <Testimonials reviews={meal?.reviews}></Testimonials>
             </div>
 
             <div className="md:col-span-3 order-first md:order-last mb-10">
               {/* MealsRequest */}
-              <MealsRequest room={meal} />
+              <MealsRequest meal={meal} />
             </div>
           </div>
         </div>

@@ -8,7 +8,24 @@
         "price": 5.99,
         "description": "Fluffy pancakes served with syrup and butter.",
         "ingredients": ["Flour", "Milk", "Eggs", "Baking Powder", "Sugar", "Butter", "Syrup"],
-        "postTime": "2024-05-31T08:00:00Z"
+        "postTime": "2024-05-31T08:00:00Z",
+        "admin": {
+          "name": "Amir Hossain Antar",
+          "image": "https://i.ibb.co/HGndpt3/a123.jpg",
+          "email": "ahantar58@gmail.com"
+        },
+        "reviews": [
+          {
+            "reviewer": "John Doe",
+            "rating": 5,
+            "comment": "Absolutely delicious! The best pancakes I've ever had."
+          },
+          {
+            "reviewer": "Jane Smith",
+            "rating": 4,
+            "comment": "Very good, but could use a bit more syrup."
+          }
+        ]
       },
       {
         "category": "Breakfast",
@@ -18,7 +35,24 @@
         "price": 6.99,
         "description": "A classic omelette with cheese and ham.",
         "ingredients": ["Eggs", "Cheese", "Ham", "Salt", "Pepper"],
-        "postTime": "2024-05-31T08:15:00Z"
+        "postTime": "2024-05-31T08:15:00Z",
+        "admin": {
+          "name": "Amir Hossain Antar",
+          "image": "https://i.ibb.co/HGndpt3/a123.jpg",
+          "email": "ahantar58@gmail.com"
+        },
+        "reviews": [
+          {
+            "reviewer": "Alice Johnson",
+            "rating": 5,
+            "comment": "Perfectly cooked and very tasty!"
+          },
+          {
+            "reviewer": "Bob Brown",
+            "rating": 4.5,
+            "comment": "Great flavor, but a bit too salty for my taste."
+          }
+        ]
       },
       {
         "category": "Breakfast",
@@ -28,7 +62,24 @@
         "price": 5.49,
         "description": "Golden brown French toast with a hint of cinnamon.",
         "ingredients": ["Bread", "Eggs", "Milk", "Cinnamon", "Vanilla Extract", "Butter"],
-        "postTime": "2024-05-31T08:30:00Z"
+        "postTime": "2024-05-31T08:30:00Z",
+        "admin": {
+          "name": "Amir Hossain Antar",
+          "image": "https://i.ibb.co/HGndpt3/a123.jpg",
+          "email": "ahantar58@gmail.com"
+        },
+        "reviews": [
+          {
+            "reviewer": "Charlie Davis",
+            "rating": 4.5,
+            "comment": "Delicious and perfectly cooked."
+          },
+          {
+            "reviewer": "Diana Evans",
+            "rating": 4,
+            "comment": "Very good, but could use a bit more cinnamon."
+          }
+        ]
       },
       {
         "category": "Lunch",
@@ -38,7 +89,24 @@
         "price": 8.99,
         "description": "Fresh salad with grilled chicken, lettuce, tomatoes, and dressing.",
         "ingredients": ["Chicken Breast", "Lettuce", "Tomatoes", "Cucumbers", "Salad Dressing"],
-        "postTime": "2024-05-31T12:00:00Z"
+        "postTime": "2024-05-31T12:00:00Z",
+        "admin": {
+          "name": "Amir Hossain Antar",
+          "image": "https://i.ibb.co/HGndpt3/a123.jpg",
+          "email": "ahantar58@gmail.com"
+        },
+        "reviews": [
+          {
+            "reviewer": "Emily Foster",
+            "rating": 5,
+            "comment": "Healthy and delicious! The chicken was perfectly cooked."
+          },
+          {
+            "reviewer": "Frank Green",
+            "rating": 4.5,
+            "comment": "Great salad, but the dressing was a bit too tangy for my liking."
+          }
+        ]
       },
       {
         "category": "Lunch",
@@ -48,7 +116,12 @@
         "price": 7.99,
         "description": "Turkey sandwich with lettuce, tomato, and mayo on whole grain bread.",
         "ingredients": ["Turkey Breast", "Lettuce", "Tomato", "Mayonnaise", "Whole Grain Bread"],
-        "postTime": "2024-05-31T12:15:00Z"
+        "postTime": "2024-05-31T12:15:00Z",
+        "admin": {
+          "name": "Amir Hossain Antar",
+          "image": "https://i.ibb.co/HGndpt3/a123.jpg",
+          "email": "ahantar58@gmail.com"
+        }
       },
       {
         "category": "Lunch",
@@ -58,7 +131,24 @@
         "price": 6.49,
         "description": "A healthy veggie wrap with hummus, cucumbers, and carrots.",
         "ingredients": ["Tortilla", "Hummus", "Cucumbers", "Carrots", "Lettuce"],
-        "postTime": "2024-05-31T12:30:00Z"
+        "postTime": "2024-05-31T12:30:00Z",
+        "admin": {
+          "name": "Amir Hossain Antar",
+          "image": "https://i.ibb.co/HGndpt3/a123.jpg",
+          "email": "ahantar58@gmail.com"
+        },
+        "reviews": [
+          {
+            "reviewer": "George Harris",
+            "rating": 4.5,
+            "comment": "Very tasty and filling sandwich."
+          },
+          {
+            "reviewer": "Helen Irvine",
+            "rating": 4,
+            "comment": "Good sandwich, but the bread was a bit dry."
+          }
+        ]
       },{
         "category": "Dinner",
         "title": "Steak",
@@ -67,7 +157,24 @@
         "price": 15.99,
         "description": "Juicy steak grilled to perfection, served with mashed potatoes.",
         "ingredients": ["Steak", "Salt", "Pepper", "Garlic", "Mashed Potatoes"],
-        "postTime": "2024-05-31T18:00:00Z"
+        "postTime": "2024-05-31T18:00:00Z",
+        "admin": {
+          "name": "Amir Hossain Antar",
+          "image": "https://i.ibb.co/HGndpt3/a123.jpg",
+          "email": "ahantar58@gmail.com"
+        },
+        "reviews": [
+          {
+            "reviewer": "John Doe",
+            "rating": 5,
+            "comment": "The steak was cooked perfectly and the mashed potatoes were so creamy!"
+          },
+          {
+            "reviewer": "Jane Smith",
+            "rating": 4.8,
+            "comment": "Delicious and tender, but a bit too much garlic for my taste."
+          }
+        ]
       },
       {
         "category": "Dinner",
@@ -77,7 +184,24 @@
         "price": 12.99,
         "description": "Classic spaghetti with a rich and savory Bolognese sauce.",
         "ingredients": ["Spaghetti", "Ground Beef", "Tomato Sauce", "Onions", "Garlic", "Olive Oil"],
-        "postTime": "2024-05-31T18:15:00Z"
+        "postTime": "2024-05-31T18:15:00Z",
+        "admin": {
+          "name": "Amir Hossain Antar",
+          "image": "https://i.ibb.co/HGndpt3/a123.jpg",
+          "email": "ahantar58@gmail.com"
+        },
+        "reviews": [
+          {
+            "reviewer": "Alice Johnson",
+            "rating": 4.7,
+            "comment": "The Bolognese sauce was full of flavor, and the spaghetti was cooked just right."
+          },
+          {
+            "reviewer": "Bob Brown",
+            "rating": 4.5,
+            "comment": "Great taste, but the portion size was a bit small."
+          }
+        ]
       },
       {
         "category": "Dinner",
@@ -87,7 +211,24 @@
         "price": 14.49,
         "description": "Grilled salmon served with a side of vegetables and lemon.",
         "ingredients": ["Salmon", "Olive Oil", "Lemon", "Salt", "Pepper", "Mixed Vegetables"],
-        "postTime": "2024-05-31T18:30:00Z"
+        "postTime": "2024-05-31T18:30:00Z",
+        "admin": {
+          "name": "Amir Hossain Antar",
+          "image": "https://i.ibb.co/HGndpt3/a123.jpg",
+          "email": "ahantar58@gmail.com"
+        },
+        "reviews": [
+          {
+            "reviewer": "Charlie Davis",
+            "rating": 4.9,
+            "comment": "The salmon was perfectly grilled, and the vegetables were fresh and crisp."
+          },
+          {
+            "reviewer": "Diana Evans",
+            "rating": 4.7,
+            "comment": "Very tasty, but I would have liked a bit more seasoning on the salmon."
+          }
+        ]
       }
     ]
   
