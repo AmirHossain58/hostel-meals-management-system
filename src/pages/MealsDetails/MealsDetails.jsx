@@ -4,28 +4,55 @@ import Heading from "../../components/Shared/Heading";
 import MealsRequest from "../../components/MealsRequest/MealsRequest";
 import { useParams } from "react-router-dom";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 import Testimonials from "./Testimonials";
 import { formatDistanceToNow } from "date-fns";
 import { GiPlayerTime } from "react-icons/gi";
 import { SlLike } from "react-icons/sl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { MdOutlineReviews } from "react-icons/md";
+import useAxiosSecure from './../../hooks/useAxiosSecure';
 
 const MealsDetails = () => {
   const [like,setLike]=useState(false)
-  const [likeCount,setLikeCount]=useState(0)
-  
-  console.log(like,likeCount);
   const { id } = useParams();
   const axiosCommon = useAxiosCommon();
+  const axiosSecure=useAxiosSecure()
   const { data: meal = {}, isLoading } = useQuery({
-    queryKey: ["meals"],
+    queryKey: ["meal"],
     queryFn: async () => {
       const res = await axiosCommon(`/meals/${id}`);
       return res.data;
     },
   });
+  const [likeCount,setLikeCount]=useState()
+  useEffect(()=>{
+    setLikeCount(meal?.like)
+  },[meal?.like])
+
+  // console.log(like);
+  // console.log(likeCount);
+  // console.log(meal?.like);
+  const {mutateAsync}=useMutation({
+    mutationKey:[],
+    mutationFn:async(updateData)=>{
+      const res=await axiosSecure.put(`/meals/${id}`,updateData)
+      return res.data
+    }
+  })
+  const handleLike=async ()=>{
+    setLike(!like)
+    setLikeCount(!like?likeCount+1:likeCount-1)
+    const data={
+      like:!like?likeCount+1:likeCount-1,
+      isLike:like
+    }
+    
+    // console.log(likeCount);
+    console.log(data);
+    await mutateAsync(data)
+  }
   if (isLoading) return <LoadingSpinner />;
 
   return (
@@ -49,7 +76,7 @@ const MealsDetails = () => {
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6">
-            {/* Room Info */}
+            {/* meal Info */}
             <div className="col-span-4 flex flex-col gap-8">
               <div className="flex flex-col gap-2">
                 <div
@@ -86,7 +113,8 @@ const MealsDetails = () => {
                 <div
                   className="
                 flex 
-                flex-row 
+                flex-wrap
+                md:flex-row 
                 items-center 
                 gap-4 
                 font-light
@@ -107,14 +135,21 @@ const MealsDetails = () => {
               </div>
               <hr />
               {/* like button */}
-              <button
+             <div className="flex  gap-2 md:gap-5">
+             <button
               onClick={()=>{
-                setLike(!like)
-                setLikeCount(like?+1:-1)
+                handleLike()
+                // setLike(!like)
+                // setLikeCount(like?0:+1)
               }}
-               className={`btn text-xl font-bold ${like&&'text-blue-600'}`}>
-                <SlLike /> Like
+               className={`btn w-1/2 text-xl font-bold ${like&&'text-blue-600 border-2 border-blue-500'}`}>
+                <SlLike /> Like {likeCount}
                 </button>
+             <button
+               className={`btn w-1/2 text-xl font-bold flex justify-center items-center`}>
+                <MdOutlineReviews className="text-2xl" /> Review {meal?.reviews.length}
+                </button>
+             </div>
               <Testimonials reviews={meal?.reviews}></Testimonials>
             </div>
 
