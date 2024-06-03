@@ -76,7 +76,7 @@ const Navbar = () => {
 
                     {/* Avatar */}
               {user&&<img
-                className="rounded-full"
+                className="rounded-full w-7"
                 referrerPolicy="no-referrer"
                 src={user && user.photoURL ? user.photoURL : avatarImg}
                 alt="profile"

@@ -7,8 +7,16 @@ import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 import Testimonials from "./Testimonials";
+import { formatDistanceToNow } from "date-fns";
+import { GiPlayerTime } from "react-icons/gi";
+import { SlLike } from "react-icons/sl";
+import { useState } from "react";
 
 const MealsDetails = () => {
+  const [like,setLike]=useState(false)
+  const [likeCount,setLikeCount]=useState(0)
+  
+  console.log(like,likeCount);
   const { id } = useParams();
   const axiosCommon = useAxiosCommon();
   const { data: meal = {}, isLoading } = useQuery({
@@ -26,14 +34,14 @@ const MealsDetails = () => {
         <title>{meal?.title}</title>
       </Helmet>
       {meal && (
-        <div className="max-w-screen-lg mx-auto">
+        <div className="max-w-screen-xl mx-auto">
           {/* Header */}
           <div className="flex flex-col gap-6">
             <div>
               <Heading title={`Category: ${meal?.category}: ${meal?.title}`}/>
-              <div className="w-full md:h-[60vh] overflow-hidden  rounded-xl">
+              <div className="w-full  overflow-hidden md:h-[60vh] rounded-xl">
                 <img
-                  className="object-cover w-full"
+                  className="object-cover md:h-[60vh] w-full"
                   src={meal.image}
                   alt="header image"
                 />
@@ -64,6 +72,17 @@ const MealsDetails = () => {
                     src={meal?.admin?.image}
                   />
                 </div>
+                <div className="flex justify-between items-center antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                <h4 className=''>
+                  Post Since: 
+                {meal?.postTime &&
+                  formatDistanceToNow(new Date(meal?.postTime))}
+              </h4>
+              <div className='font-semibold'>⭐ {meal?.rating}</div>
+                </div>
+               
+               
+      
                 <div
                   className="
                 flex 
@@ -72,6 +91,7 @@ const MealsDetails = () => {
                 gap-4 
                 font-light
                 text-neutral-500
+                mt-2
               "
                 >
                  Ingredients: {meal?.ingredients?.map((data,i)=><div key={i}>{data} </div>)} 
@@ -86,6 +106,15 @@ const MealsDetails = () => {
                 {meal?.description}
               </div>
               <hr />
+              {/* like button */}
+              <button
+              onClick={()=>{
+                setLike(!like)
+                setLikeCount(like?+1:-1)
+              }}
+               className={`btn text-xl font-bold ${like&&'text-blue-600'}`}>
+                <SlLike /> Like
+                </button>
               <Testimonials reviews={meal?.reviews}></Testimonials>
             </div>
 

@@ -60,6 +60,6 @@ const Testimonials = ({ reviews }) => {
 };
 
 Testimonials.propTypes = {
-  reviews: PropTypes.object,
+  reviews: PropTypes.array,
 };
 export default Testimonials;
