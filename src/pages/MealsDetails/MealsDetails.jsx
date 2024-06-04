@@ -2,7 +2,7 @@ import Container from "../../components/Shared/Container";
 import { Helmet } from "react-helmet-async";
 import Heading from "../../components/Shared/Heading";
 import MealsRequest from "../../components/MealsRequest/MealsRequest";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
@@ -13,8 +13,15 @@ import { SlLike } from "react-icons/sl";
 import { useEffect, useState } from "react";
 import { MdOutlineReviews } from "react-icons/md";
 import useAxiosSecure from './../../hooks/useAxiosSecure';
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
+import ReviewModal from "../../components/Modal/ReviewModal";
 
 const MealsDetails = () => {
+  const {user}=useAuth()
+  const navigate = useNavigate();
+  const location = useLocation();
+  const[isOpen,setIsOpen]=useState(false)
   const [like,setLike]=useState(false)
   const { id } = useParams();
   const axiosCommon = useAxiosCommon();
@@ -30,10 +37,6 @@ const MealsDetails = () => {
   useEffect(()=>{
     setLikeCount(meal?.like)
   },[meal?.like])
-
-  // console.log(like);
-  // console.log(likeCount);
-  // console.log(meal?.like);
   const {mutateAsync}=useMutation({
     mutationKey:[],
     mutationFn:async(updateData)=>{
@@ -42,17 +45,38 @@ const MealsDetails = () => {
     }
   })
   const handleLike=async ()=>{
+    if (user && user.email) {
     setLike(!like)
     setLikeCount(!like?likeCount+1:likeCount-1)
     const data={
-      like:!like?likeCount+1:likeCount-1,
-      isLike:like
+      like:!like?likeCount+1:likeCount-1
     }
     
     // console.log(likeCount);
     console.log(data);
     await mutateAsync(data)
-  }
+  }else{
+    Swal.fire({
+        title: "You are not Logged In",
+        text: "Please login to add to the cart?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, login!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            //   send the user to the login page
+            navigate('/login', { state: { from: location } })
+        }
+    });
+}   
+
+
+}
+const handleReview=async()=>{
+
+}
   if (isLoading) return <LoadingSpinner />;
 
   return (
@@ -107,9 +131,6 @@ const MealsDetails = () => {
               </h4>
               <div className='font-semibold'>⭐ {meal?.rating}</div>
                 </div>
-               
-               
-      
                 <div
                   className="
                 flex 
@@ -146,9 +167,11 @@ const MealsDetails = () => {
                 <SlLike /> Like {likeCount}
                 </button>
              <button
+             onClick={()=>setIsOpen(true)}
                className={`btn w-1/2 text-xl font-bold flex justify-center items-center`}>
                 <MdOutlineReviews className="text-2xl" /> Review {meal?.reviews.length}
                 </button>
+                <ReviewModal setIsOpen={setIsOpen} isOpen={isOpen}></ReviewModal>
              </div>
               <Testimonials reviews={meal?.reviews}></Testimonials>
             </div>
