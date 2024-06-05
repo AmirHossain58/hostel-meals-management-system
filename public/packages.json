@@ -1,0 +1,35 @@
+[
+    {
+      "title": "Silver",
+      "description": "Upgrade to the Silver package and enjoy extra benefits and enhanced services.",
+      "price": 19.99,
+      "benefits": [
+        "Access to exclusive events",
+        "Priority support",
+        "Basic meal customization options"
+      ]
+    },
+    {
+      "title": "Gold",
+      "description": "Upgrade to the Gold package for premium services and additional perks.",
+      "price": 39.99,
+      "benefits": [
+        "All Silver package benefits",
+        "Extended meal customization options",
+        "Free delivery within the campus",
+        "Access to premium events"
+      ]
+    },
+    {
+      "title": "Platinum",
+      "description": "Upgrade to the Platinum package for the ultimate experience with all-inclusive services.",
+      "price": 59.99,
+      "benefits": [
+        "All Gold package benefits",
+        "Unlimited meal customization options",
+        "Personalized meal plans",
+        "Complimentary tickets to exclusive events",
+        "Priority access to new features"
+      ]
+    }
+  ]

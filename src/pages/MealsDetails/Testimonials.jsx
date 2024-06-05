@@ -9,9 +9,10 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import { Rating } from "@smastrom/react-rating";
+import { Rating } from '@smastrom/react-rating'
 
-import "@smastrom/react-rating/style.css";
+import '@smastrom/react-rating/style.css'
+import avatarImg from "../../assets/images/placeholder.jpg";
 const Testimonials = ({ reviews }) => {
 
   return (
@@ -41,15 +42,14 @@ const Testimonials = ({ reviews }) => {
                   readOnly
                 />
                 <p>{review?.comment}</p>
-                {review?.image&&<div className="avatar">
-                  <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 overflow-hidden">
-                    <img src={review?.image} />
+                <div className="avatar">
+                  <div className="w-12 rounded-full ring  ring-offset-base-100 ring-offset-2 overflow-hidden">
+                    <img src={review?.image||avatarImg} />
                   </div>
-                </div>}
+                </div>
 
 
-
-                <h3 className="text-2xl text-orange-400">{review.reviewer}</h3>
+                <h3 className="text-2xl text-orange-400">{review?.reviewer}</h3>
               </div>
             </SwiperSlide>
           ))}

@@ -8,7 +8,7 @@ const CategoryBox = ({ label, icon: Icon }) => {
   const handleClick=()=>{
     let currentQuery={category:label}
 const url=queryString.stringifyUrl({
-  url:'/meals',
+  url:'/',
   query:currentQuery
 })
 navigate(url)
