@@ -162,10 +162,28 @@ const MealsDetails = () => {
   const handleMealRequest=async(mealInfo)=>{
     const requestMealInfo={
       ...mealInfo,
+      mealId:mealInfo?._id,
+      status:"pending",
       requesterEmail:user?.email
     }
+  delete requestMealInfo?._id
     console.log(requestMealInfo);
-    // const res = await axiosSecure.put(`/meals/like/${id}`, requestMealInfo);
+    try{
+      const res = await axiosSecure.post(`/Meal-request`, requestMealInfo);
+      if(res.data.acknowledged){
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Your Meal Request is Success",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+      console.log(res.data);
+    }
+    catch(err){
+      console.log(err);
+    }
 
   }
   if (isLoading || loading) return <LoadingSpinner />;
