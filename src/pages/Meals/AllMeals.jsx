@@ -7,20 +7,16 @@ import { useState } from "react";
 
 
 const AllMeals = () => {
-  const [itemsPerPage, setItemsPerPage] = useState(4)
   const [currentPage, setCurrentPage] = useState(1)
-  const [count, setCount] = useState(0)
   const [filter, setFilter] = useState('')
-  const [sort, setSort] = useState('')
   const [search, setSearch] = useState('')
   const [searchText, setSearchText] = useState('')
-  const [jobs, setJobs] = useState([])
   const [priceRange, setPriceRange] = useState([0, 50]);
   const axiosCommon=useAxiosCommon()
 const {data:meals=[],isLoading}=useQuery({
-  queryKey:['meals',currentPage, filter, itemsPerPage, search, sort],
+  queryKey:['meals', filter, search],
   queryFn:async()=>{
-const res=await axiosCommon(`/meals?page=${currentPage}&size=${itemsPerPage}&category=${filter}&sort=${sort}&search=${search}`)
+const res=await axiosCommon(`/meals?category=${filter}&search=${search}`)
 return res.data
   }
 })
@@ -82,8 +78,8 @@ const handleSearch = e => {
             </div>
           </form>
           <div>
-      <label className="text-xl font-bold">Price range: {priceRange[0]} - {priceRange[1]}</label>
-      <div className="flex flex-col gap-2 mt-1">
+      <label className="md:text-xl font-bold">Price range: {priceRange[0]} - {priceRange[1]}</label>
+      <div className="flex flex-col md:gap-2 mt-1">
       <input 
         type="range" 
         min="0" 
@@ -104,19 +100,11 @@ const handleSearch = e => {
         </div>
         </div>
     
-      {meals && meals.length > 0 ? (
+      {meals && meals.length > 0 && (
         <div className=' grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8'>
           {filteredByPriceMeals.map((meals,i )=> (
             <Card key={i} meals={meals} />
           ))}
-        </div>
-      ) : (
-        <div className='flex items-center justify-center min-h-[calc(100vh-300px)]'>
-          {/* <Heading
-            center={true}
-            title=''
-            subtitle=''
-          /> */}
         </div>
       )}
     </Container>
