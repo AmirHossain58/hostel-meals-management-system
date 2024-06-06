@@ -50,7 +50,7 @@ const Checkout = () => {
           rel="noopener noreferrer"
           className="btn inline-block w-full px-5 py-3 font-bold tracking-wider text-center rounded dark:bg-gray-100 dark:text-violet-600"
         >
-          Pay Now
+          Subscribe Now
         </button>
         <CheckoutModal
         mealInfo={packDetails}

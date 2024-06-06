@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
-const MealsRequest = ({ meal,isOpen,closeModal ,handleRequestButton}) => {
+const MealsRequest = ({ meal,isOpen,closeModal ,handleRequestButton,handleMealRequest}) => {
   return (
     <div className="rounded-xl border-[1px] border-neutral-200 overflow-hidden bg-white">
       <div className="flex items-center gap-1 p-4">
@@ -22,6 +22,7 @@ const MealsRequest = ({ meal,isOpen,closeModal ,handleRequestButton}) => {
         <Button onClick={handleRequestButton} label={"Request"} />
       </div>
       <MealRequestModal
+      handleMealRequest={handleMealRequest}
        closeModal={closeModal} 
        isOpen={isOpen} 
        mealInfo={meal}
@@ -38,6 +39,7 @@ const MealsRequest = ({ meal,isOpen,closeModal ,handleRequestButton}) => {
 MealsRequest.propTypes = {
   meal: PropTypes.object,
   handleRequestButton: PropTypes.func,
+  handleMealRequest: PropTypes.func,
 };
 
 export default MealsRequest;

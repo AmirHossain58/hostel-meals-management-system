@@ -14,8 +14,8 @@ const UsePackageMembership = () => {
       return res.data;
     },
   });
-  console.log(membership);
-  return [membership];
+  const badge=membership.badge
+  return [membership,badge];
 };
 
 export default UsePackageMembership;

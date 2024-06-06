@@ -23,13 +23,13 @@ const MealsDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenReq, setIsOpenReq] = useState(false);
   const [like, setLike] = useState(false);
   const [rating, setRating] = useState(1);
   const { id } = useParams();
   const axiosCommon = useAxiosCommon();
   const axiosSecure = useAxiosSecure();
-  const i = UsePackageMembership();
-  console.log(i);
+  const  [membership,badge]= UsePackageMembership();
   const {
     data: meal = {},
     isLoading,
@@ -120,11 +120,28 @@ const MealsDetails = () => {
     }
   };
   const closeModal = () => {
-    setIsOpen(false);
+    setIsOpenReq(false);
   };
   const handleRequestButton = () => {
     if (user && user.email) {
-      setIsOpen(true);
+      if(membership&&(badge==='Silver'||'Gold'||'Platinum')){
+        setIsOpenReq(true);
+      }else {
+        Swal.fire({
+          title: "You are not Subscribed any Package",
+          text: "Please subscribed a package to Request Meals?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, subscribe!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            //   send the user to the membership Packages page
+            navigate("/membershipPackages", { state: { from: location } });
+          }
+        });
+      }
     } else {
       Swal.fire({
         title: "You are not Logged In",
@@ -142,6 +159,15 @@ const MealsDetails = () => {
       });
     }
   };
+  const handleMealRequest=async(mealInfo)=>{
+    const requestMealInfo={
+      ...mealInfo,
+      requesterEmail:user?.email
+    }
+    console.log(requestMealInfo);
+    // const res = await axiosSecure.put(`/meals/like/${id}`, requestMealInfo);
+
+  }
   if (isLoading || loading) return <LoadingSpinner />;
 
   return (
@@ -257,7 +283,8 @@ const MealsDetails = () => {
             <div className="md:col-span-3 order-first md:order-last mb-10">
               {/* MealsRequest */}
               <MealsRequest
-                isOpen={isOpen}
+              handleMealRequest={handleMealRequest}
+                isOpen={isOpenReq}
                 closeModal={closeModal}
                 handleRequestButton={handleRequestButton}
                 meal={meal}

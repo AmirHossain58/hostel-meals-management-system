@@ -7,6 +7,8 @@ import SignUp from '../pages/SignUp/SignUp'
 import AllMeals from '../pages/Meals/AllMeals'
 import MealsDetails from '../pages/MealsDetails/MealsDetails'
 import Checkout from '../pages/Checkout/Checkout'
+import Membership from '../components/Home/MembershipPackages/Membership'
+import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
   {
@@ -28,8 +30,12 @@ export const router = createBrowserRouter([
       },
       {
         path: '/checkout/:pack',
-        element: <Checkout/>,
-        loader:({params})=>fetch(`/packages.json`)
+        element: <PrivateRoute><Checkout/></PrivateRoute>,
+        loader:()=>fetch(`/packages.json`)
+      },
+      {
+        path: '/membershipPackages',
+        element: <PrivateRoute><Membership/></PrivateRoute>,
       },
     ],
   },
