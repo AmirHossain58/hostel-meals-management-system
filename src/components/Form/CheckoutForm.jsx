@@ -101,7 +101,8 @@ const CheckoutForm = ({ closeModal, bookingInfo, refetch }) => {
       try {
         // 2. save payment info in booking collection (db)
         const { data } = await axiosSecure.post('/booking', paymentInfo)
-        console.log(data)
+        const data1  = await axiosSecure.put('/user',{badge:bookingInfo?.title,})
+        
         closeModal()
         toast.success(`Package ${bookingInfo?.title} Buy Successfully`)
         navigate('/dashboard/my-bookings')

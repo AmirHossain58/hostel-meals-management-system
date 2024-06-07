@@ -4,29 +4,42 @@ import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 import Card from "../../components/Home/Card";
 import Container from '../../components/Shared/Container'
 import { useState } from "react";
+import InfiniteScroll from 'react-infinite-scroller';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import React from 'react';
+import { ImSpinner10 } from "react-icons/im";
+
+
+
 
 
 const AllMeals = () => {
-  const [currentPage, setCurrentPage] = useState(1)
   const [filter, setFilter] = useState('')
   const [search, setSearch] = useState('')
   const [searchText, setSearchText] = useState('')
   const [priceRange, setPriceRange] = useState([0, 50]);
   const axiosCommon=useAxiosCommon()
-const {data:meals=[],isLoading}=useQuery({
-  queryKey:['meals', filter, search],
-  queryFn:async()=>{
-const res=await axiosCommon(`/meals?category=${filter}&search=${search}`)
-return res.data
-  }
-})
+
+
+const {
+  data,
+  fetchNextPage,
+  hasNextPage,
+  isFetching,
+  isFetchingNextPage,
+  isLoading
+} = useInfiniteQuery({
+  queryKey: ['mealsAll',filter, search,priceRange],
+  queryFn: async()=>{
+    const res=await axiosCommon(`/api/meals?category=${filter}&search=${search}&minPrice=${priceRange[0]}&maxPrice=${priceRange[1]}`)
+    return res.data
+  },
+  getNextPageParam: (lastPage, pages) => lastPage.nextPage ?? false,
+});
+
 const handlePriceChange = (min, max) => {
   setPriceRange([min, max]);
 };
-
-const filteredByPriceMeals = meals.filter(meal =>
-  meal.price >= priceRange[0] && meal.price <= priceRange[1]
-);
 
 
 const handleSearch = e => {
@@ -46,7 +59,6 @@ const handleSearch = e => {
             <select
               onChange={e => {
                 setFilter(e.target.value)
-                setCurrentPage(1)
               }}
               value={filter}
               name='category'
@@ -68,8 +80,8 @@ const handleSearch = e => {
                 onChange={e => setSearchText(e.target.value)}
                 value={searchText}
                 name='search'
-                placeholder='Enter Job Title'
-                aria-label='Enter Job Title'
+                placeholder='Enter Meal name'
+                aria-label='Enter Meal name'
               />
 
               <button className='px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:bg-gray-600 focus:outline-none'>
@@ -99,14 +111,28 @@ const handleSearch = e => {
         </div>
         </div>
         </div>
-    
-      {meals && meals.length > 0 && (
-        <div className=' grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8'>
-          {filteredByPriceMeals.map((meals,i )=> (
-            <Card key={i} meals={meals} />
-          ))}
-        </div>
-      )}
+
+      {/* all  */}
+         <div>
+      <InfiniteScroll
+      loadMore={() => fetchNextPage()}
+        hasMore={hasNextPage}
+        loader={<div key={0} className="flex justify-center "><ImSpinner10 className="animate-spin text-5xl mt-5" /></div>}
+      >
+        {data?.pages?.map((page, i) => (
+          <React.Fragment key={i}>
+            <div className=' grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8'>
+
+            {page?.meals?.map((meal,i) => (
+              
+             <Card key={i} meals={meal} />
+            ))}
+            </div>
+          </React.Fragment>
+        ))}
+      </InfiniteScroll>
+      {isFetching && !isFetchingNextPage ? 'Fetching...' : null}
+    </div>
     </Container>
   );
 };

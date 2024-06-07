@@ -56,16 +56,6 @@ const CheckoutModal = ({ closeModal, isOpen, mealInfo,refetch }) => {
                       Packages : {mealInfo?.title}
                     </p>
                   </div>
-                  {/* <div className='mt-2'>
-                  <p className='text-sm text-gray-500'>
-                    Category: {mealInfo?.category}
-                    </p>
-                  </div> */}
-                  {/* <div className='mt-2'>
-                    <p className='text-sm text-gray-500'>
-                      Location: {mealInfo?.location}
-                    </p>
-                  </div> */}
                   <div className='mt-2'>
                     <p className='text-sm text-gray-500'>
                       Name : {user?.displayName}

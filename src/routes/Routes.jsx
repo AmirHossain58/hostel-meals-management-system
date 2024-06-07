@@ -9,6 +9,11 @@ import MealsDetails from '../pages/MealsDetails/MealsDetails'
 import Checkout from '../pages/Checkout/Checkout'
 import Membership from '../components/Home/MembershipPackages/Membership'
 import PrivateRoute from './PrivateRoute';
+import DashboardLayout from '../layouts/DashboardLayout'
+import ManageUsers from '../pages/Dashboard/Admin/ManageUsers'
+import AdminRoute from './AdminRoute'
+import MyBookings from '../pages/Dashboard/Guest/MyBookings'
+import Profile from '../pages/Dashboard/Common/Profile'
 
 export const router = createBrowserRouter([
   {
@@ -41,4 +46,52 @@ export const router = createBrowserRouter([
   },
   { path: '/login', element: <Login /> },
   { path: '/signup', element: <SignUp /> },
+  {
+    path: '/dashboard',
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      // {
+      //   path: 'my-listings',
+      //   element: (
+      //     <PrivateRoute>
+      //       <HostRoute>
+      //         <MyListings />
+      //       </HostRoute>
+      //     </PrivateRoute>
+      //   ),
+      // },
+      {
+        path: 'manage-users',
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageUsers />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'my-bookings',
+        element: (
+          <PrivateRoute>
+            <MyBookings />
+          </PrivateRoute>
+        ),
+      },
+      
+      {
+        path: 'profile',
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
 ])
+
