@@ -1,42 +1,35 @@
-import { BsFingerprint } from 'react-icons/bs'
-import { GrUserAdmin } from 'react-icons/gr'
-import { useState } from 'react'
-import MenuItem from './/MenuItem'
-import useRole from '../../../../hooks/useRole'
+import { useState } from "react";
+import MenuItem from ".//MenuItem";
+import useBadge from "../../../../hooks/useRole.js";
 
-import useAxiosSecure from '../../../../hooks/useAxiosSecure'
-import toast from 'react-hot-toast'
-import useAuth from '../../../../hooks/useAuth.js'
-import { CgProfile } from 'react-icons/cg'
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import useAuth from "../../../../hooks/useAuth.js";
+import { CgProfile } from "react-icons/cg";
+import { FaHistory } from "react-icons/fa";
+import { MdReviews } from "react-icons/md";
+import { GiHotMeal } from "react-icons/gi";
 const GuestMenu = () => {
-  const axiosSecure = useAxiosSecure()
-  const { user } = useAuth()
-  const [role] = useRole()
-  
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const [role] = useBadge();
+
   return (
     <>
-        <MenuItem
-          icon={CgProfile }
-          label='My Profile'
-          address='my-profile'
-        />
+      <MenuItem icon={CgProfile} label="My Profile" address="my-profile" />
       <MenuItem
-        icon={BsFingerprint}
-        label='Requested Meals'
-        address='requested-meals'
+        icon={GiHotMeal}
+        label="Requested Meals"
+        address="requested-meals"
       />
+      <MenuItem icon={MdReviews} label="My Reviews" address="my-reviews" />
       <MenuItem
-        icon={BsFingerprint}
-        label='My Reviews'
-        address='my-reviews'
-      />
-      <MenuItem
-        icon={BsFingerprint}
-        label='Payment History'
-        address='payment-history'
+        icon={FaHistory}
+        label="Payment History"
+        address="payment-history"
       />
     </>
-  )
-}
+  );
+};
 
-export default GuestMenu
+export default GuestMenu;

@@ -1,24 +1,26 @@
 import { FaUserCog } from "react-icons/fa";
 import MenuItem from "./MenuItem";
 import { CgProfile } from "react-icons/cg";
-import { MdOutlineUpcoming, MdReviews } from "react-icons/md";
+import { MdAdd, MdManageAccounts, MdOutlineUpcoming, MdReviews } from "react-icons/md";
 import { GiFoodTruck, GiMeal } from "react-icons/gi";
+import { RiAdminLine } from "react-icons/ri";
+
 
 const AdminMenu = () => {
   return (
     <>
       <MenuItem 
-      icon={CgProfile} 
+      icon={RiAdminLine} 
       label="Admin Profile" 
       address="admin-profile" 
       />
       <MenuItem 
-      icon={CgProfile} 
+      icon={MdManageAccounts} 
       label="Manage Users" 
       address="manage-users" 
       />
       <MenuItem 
-      icon={CgProfile} 
+      icon={MdAdd} 
       label="Add Meal" 
       address="add-meal:" 
       />
@@ -32,6 +34,7 @@ const AdminMenu = () => {
       label="All Reviews" 
       address="all-reviews" 
       />
+      
       <MenuItem 
       icon={ GiFoodTruck} 
       label="Serve Meals" 
