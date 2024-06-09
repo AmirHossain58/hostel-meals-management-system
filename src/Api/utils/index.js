@@ -2,7 +2,6 @@ import axios from "axios"
 
 // image upload
 export const imageUpload=async image=>{
-  console.log(image);
     const formData=new FormData()
 formData.append('image',image)
      // 1. Upload image and get image url

@@ -6,7 +6,7 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure'
 import { useMutation } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 
-const BookingDataRow = ({ booking, refetch }) => {
+const RequestedDataRow = ({requestedMeal, refetch }) => {
   const axiosSecure = useAxiosSecure()
   const [isOpen, setIsOpen] = useState(false)
   const closeModal = () => {
@@ -22,11 +22,11 @@ const BookingDataRow = ({ booking, refetch }) => {
     onSuccess: async data => {
       console.log(data)
       refetch()
-      toast.success('Booking Canceled')
+      toast.success('Meal Request Canceled')
       //   Change Room booked status back to false
-      await axiosSecure.patch(`/room/status/${booking?.roomId}`, {
-        status: false,
-      })
+      // await axiosSecure.patch(`/room/status/${requestedMeal?.roomId}`, {
+      //   status: false,
+      // })
     },
   })
 
@@ -48,45 +48,25 @@ const BookingDataRow = ({ booking, refetch }) => {
             <div className='block relative'>
               <img
                 alt='profile'
-                src={booking?.image}
+                src={requestedMeal?.image}
                 className='mx-auto object-cover rounded h-10 w-15 '
               />
             </div>
           </div>
           <div className='ml-3'>
-            <p className='text-gray-900 whitespace-no-wrap'>{booking?.title}</p>
+            <p className='text-gray-900 whitespace-no-wrap'>{requestedMeal?.title}</p>
           </div>
         </div>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <div className='flex items-center'>
-          <div className='flex-shrink-0'>
-            <div className='block relative'>
-              <img
-                alt='profile'
-                src={booking?.guest?.image}
-                className='mx-auto object-cover rounded h-10 w-15 '
-              />
-            </div>
-          </div>
-          <div className='ml-3'>
-            <p className='text-gray-900 whitespace-no-wrap'>
-              {booking?.guest?.name}
-            </p>
-          </div>
-        </div>
+        {  <p className='text-gray-900 whitespace-no-wrap'>{requestedMeal?.like}</p>}
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 whitespace-no-wrap'>${booking?.price}</p>
+        <p className='text-gray-900 whitespace-no-wrap'>{requestedMeal?.reviews?.length}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <p className='text-gray-900 whitespace-no-wrap'>
-          {format(new Date(booking?.from), 'P')}
-        </p>
-      </td>
-      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 whitespace-no-wrap'>
-          {format(new Date(booking?.to), 'P')}
+          {requestedMeal?.status}
         </p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
@@ -105,16 +85,16 @@ const BookingDataRow = ({ booking, refetch }) => {
           handleDelete={handleDelete}
           closeModal={closeModal}
           isOpen={isOpen}
-          id={booking?._id}
+          id={requestedMeal?._id}
         />
       </td>
     </tr>
   )
 }
 
-BookingDataRow.propTypes = {
-  booking: PropTypes.object,
+RequestedDataRow.propTypes = {
+  requestedMeal: PropTypes.object,
   refetch: PropTypes.func,
 }
 
-export default BookingDataRow
+export default RequestedDataRow

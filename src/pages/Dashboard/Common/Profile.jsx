@@ -32,7 +32,7 @@ const Profile = () => {
         setImage(image_url)
       }
       console.log(name,image);
-    //  await updateUserProfile(name,image_url)
+     await updateUserProfile(name,image_url)
     } catch (err) {
       console.log(err)
       toast.error(err.message)

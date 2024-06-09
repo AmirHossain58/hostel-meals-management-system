@@ -12,8 +12,10 @@ import PrivateRoute from './PrivateRoute';
 import DashboardLayout from '../layouts/DashboardLayout'
 import ManageUsers from '../pages/Dashboard/Admin/ManageUsers'
 import AdminRoute from './AdminRoute'
-import MyBookings from '../pages/Dashboard/Guest/MyBookings'
 import Profile from '../pages/Dashboard/Common/Profile'
+import RequestedMeals from '../pages/Dashboard/Guest/RequestedMeals'
+import MyReviews from '../pages/Dashboard/Guest/MyReviews'
+import PaymentHistory from '../pages/Dashboard/Guest/PaymentHistory'
 
 export const router = createBrowserRouter([
   {
@@ -75,10 +77,26 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'my-bookings',
+        path: 'requested-meals',
         element: (
           <PrivateRoute>
-            <MyBookings />
+            <RequestedMeals />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'my-reviews',
+        element: (
+          <PrivateRoute>
+            <MyReviews />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'payment-history',
+        element: (
+          <PrivateRoute>
+            <PaymentHistory />
           </PrivateRoute>
         ),
       },
