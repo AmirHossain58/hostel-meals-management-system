@@ -16,11 +16,10 @@ const RequestedDataRow = ({requestedMeal, refetch }) => {
   //   delete
   const { mutateAsync } = useMutation({
     mutationFn: async id => {
-      const { data } = await axiosSecure.delete(`/booking/${id}`)
+      const { data } = await axiosSecure.delete(`/requested-meals/${id}`)
       return data
     },
     onSuccess: async data => {
-      console.log(data)
       refetch()
       toast.success('Meal Request Canceled')
       //   Change Room booked status back to false
@@ -32,7 +31,6 @@ const RequestedDataRow = ({requestedMeal, refetch }) => {
 
   //  Handle Delete
   const handleDelete = async id => {
-    console.log(id)
     try {
       await mutateAsync(id)
     } catch (err) {

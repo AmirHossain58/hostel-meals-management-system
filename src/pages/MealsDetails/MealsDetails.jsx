@@ -94,7 +94,9 @@ const MealsDetails = () => {
       email: user?.email,
       rating: rating,
       comment: reviewComment,
+      reviewId:user?.email.split('@',)[0]+(parseInt(meal?.reviews?.length)+1)
     };
+    console.log(review);
     await mutateAsyncReview(review);
     refetch();
     setIsOpen(false);
@@ -279,7 +281,7 @@ const MealsDetails = () => {
                 >
                   <SlLike /> Like {meal?.like}
                 </button>
-                {/* reviews button */}
+                {/* review button */}
                 <button
                   onClick={handleReviewButton}
                   className={`btn w-1/2 text-xl font-bold flex justify-center items-center`}

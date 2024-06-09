@@ -16,10 +16,11 @@ const MyReviewsDataRow = ({myReview, refetch }) => {
     setIsOpen(false)
   }
 
+  console.log(myReview);
   //   delete
   const { mutateAsync } = useMutation({
     mutationFn: async id => {
-      const { data } = await axiosSecure.delete(`/booking/${id}`)
+      const { data } = await axiosSecure.delete(`/meals/review/${id}`)
       return data
     },
     onSuccess: async data => {
@@ -35,6 +36,7 @@ const MyReviewsDataRow = ({myReview, refetch }) => {
 
   //  Handle Delete
   const handleDelete = async id => {
+    
     console.log(id)
     try {
       await mutateAsync(id)
@@ -91,7 +93,7 @@ const MyReviewsDataRow = ({myReview, refetch }) => {
           handleDelete={handleDelete}
           closeModal={closeModal}
           isOpen={isOpen}
-          id={myReview?._id}
+          id={myReview?.review?.reviewId}
         />
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>

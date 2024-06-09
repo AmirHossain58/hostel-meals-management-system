@@ -23,7 +23,6 @@ const MyReviews = () => {
       },
     })
   
-    console.log(myReviews)
     if (isLoading) return <LoadingSpinner />
     return (
       <>
