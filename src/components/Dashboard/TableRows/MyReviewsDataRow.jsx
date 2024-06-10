@@ -8,29 +8,42 @@ import toast from 'react-hot-toast'
 import { MdDelete, MdModeEdit } from 'react-icons/md'
 import { GrFormView } from 'react-icons/gr'
 import { Link } from 'react-router-dom'
+import ReviewModal from '../../Modal/ReviewModal'
+import ReviewModalEdit from '../../Modal/ReviewModalEdit'
 
 const MyReviewsDataRow = ({myReview, refetch }) => {
   const axiosSecure = useAxiosSecure()
   const [isOpen, setIsOpen] = useState(false)
+  const [isOpenEdit, setIsOpenEdit] = useState(false)
+  const [rating, setRating] = useState(myReview?.review?.rating);
+  
   const closeModal = () => {
     setIsOpen(false)
   }
-
-  console.log(myReview);
+const reviewId=myReview?.review?.reviewId
   //   delete
   const { mutateAsync } = useMutation({
     mutationFn: async id => {
-      const { data } = await axiosSecure.delete(`/meals/review/${id}`)
+      const { data } = await axiosSecure.put(`/meals-review/${id}`,{reviewId})
       return data
     },
     onSuccess: async data => {
       console.log(data)
       refetch()
-      toast.success('Meal Request Canceled')
-      //   Change Room booked status back to false
-      // await axiosSecure.patch(`/room/status/${requestedMeal?.roomId}`, {
-      //   status: false,
-      // })
+      toast.success('Review deleted successfully.')
+     setIsOpen(false)
+    },
+  })
+  const { mutateAsync:mutateAsyncReview } = useMutation({
+    mutationFn: async review => {
+      const { data } = await axiosSecure.put(`/meals-review-edit/${myReview?.mealId}`,review)
+      return data
+    },
+    onSuccess: async data => {
+      console.log(data)
+      refetch()
+      toast.success('Review Update successfully.')
+     setIsOpenEdit(false)
     },
   })
 
@@ -44,6 +57,20 @@ const MyReviewsDataRow = ({myReview, refetch }) => {
       console.log(err)
     }
   }
+  const handleReviewEdit = async (e) => {
+    e.preventDefault();
+    const reviewComment = e.target.review.value;
+    const review = {
+      rating: rating,
+      comment: reviewComment,
+      reviewId:myReview?.review?.reviewId
+    };
+    console.log(review);
+    await mutateAsyncReview(review);
+    refetch();
+    setIsOpen(false);
+  };
+ 
 
   return (
     <tr>
@@ -70,17 +97,26 @@ const MyReviewsDataRow = ({myReview, refetch }) => {
         <p className='text-gray-900 whitespace-no-wrap'>{myReview?.review?.comment}</p>
       </td>
       <td className='px-5 py-5 border-b  border-gray-200 bg-white text-sm'>
-        <button className='text-gray-900 whitespace-no-wrap'>
+        <button
+        onClick={()=>setIsOpenEdit(true)}
+        className='text-gray-900 whitespace-no-wrap'>
             <div className='flex items-center gap-1 relative cursor-pointer px-3 py-1 font-semibold  leading-tight  bg-gray-200 opacity-50 rounded-full'>
         <MdModeEdit />Edit
             </div>
-
         </button>
+        <ReviewModalEdit
+        comment={myReview?.review?.comment}
+        rating={rating}
+        setRating={setRating}
+        isOpen={isOpenEdit}
+        setIsOpen={setIsOpenEdit}
+        handleSubmit={handleReviewEdit}
+        ></ReviewModalEdit>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <button
           onClick={() => setIsOpen(true)}
-          className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'
+          className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-red-700 leading-tight'
         >
           <span
             aria-hidden='true'
@@ -93,7 +129,7 @@ const MyReviewsDataRow = ({myReview, refetch }) => {
           handleDelete={handleDelete}
           closeModal={closeModal}
           isOpen={isOpen}
-          id={myReview?.review?.reviewId}
+          id={myReview?.mealId}
         />
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>

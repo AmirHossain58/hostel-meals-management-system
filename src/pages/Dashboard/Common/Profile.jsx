@@ -8,6 +8,7 @@ import { imageUpload } from './../../../Api/utils/index';
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const Profile = () => {
   const { user, loading, updateUserProfile } = useAuth() || {};
@@ -15,11 +16,18 @@ const Profile = () => {
   const axiosSecure = useAxiosSecure()
   const[name,setName]=useState(user?.displayName)
   const[image,setImage]=useState(user?.photoURL)
-
   const [imagePreview, setImagePreview] = useState(user?.photoURL)
   const [imageText, setImageText] = useState('Upload Image')
   const [isOpen, setIsOpen] = useState(false);
   const [role, isLoading] = useBadge();
+  const{data}=useQuery({
+    queryKey:['total-meals-added'],
+    queryFn:async()=>{
+      const res=await axiosSecure(`meals-added/${user?.email}`)
+      return res.data
+    }
+  })
+  console.log(data);
   //   Form handler
   const handleSubmit = async e => {
     e.preventDefault()
@@ -67,10 +75,15 @@ const Profile = () => {
           <p className="p-2 uppercase px-4 text-xs text-white bg-gray-500 rounded-full">
             {role.role}
           </p>
+         
           <p className="mt-2 text-xl font-medium text-gray-800 ">
             User Id: {user?.uid}
           </p>
+          
           <div className="w-full p-2 mt-4 rounded-lg">
+          <p className=" uppercase  font-bold">
+            Meals Added : {data?.length}
+          </p>
             <div className="flex flex-wrap items-center justify-between text-sm text-gray-600 ">
               <p className="flex flex-col">
                 Name

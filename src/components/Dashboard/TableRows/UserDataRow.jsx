@@ -5,6 +5,7 @@ import { useMutation } from '@tanstack/react-query'
 import useAxiosSecure from '../../../hooks/useAxiosSecure'
 import toast from 'react-hot-toast'
 import useAuth from '../../../hooks/useAuth'
+import UpdateUserRoleModal from '../../Modal/UpdateUserRoleModal'
 const UserDataRow = ({ user, refetch }) => {
   const { user: loggedInUser } = useAuth()
 
@@ -48,19 +49,20 @@ const UserDataRow = ({ user, refetch }) => {
   return (
     <tr>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+        <p className='text-gray-900 whitespace-no-wrap'>{user?.displayName}</p>
+      </td>
+      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <p className='text-gray-900 whitespace-no-wrap'>{user?.email}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 whitespace-no-wrap'>{user?.role}</p>
+        <p className='text-gray-900 whitespace-no-wrap'>{user?.role.slice(0,1).toUpperCase()+user?.role.slice(1)}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         {user?.status ? (
           <p
-            className={`${
-              user.status === 'Verified' ? 'text-green-500' : 'text-yellow-500'
-            } whitespace-no-wrap`}
+            className={`whitespace-no-wrap`}
           >
-            {user.status}
+            {user?.badge.slice(0,1).toUpperCase()+user?.badge.slice(1)}
           </p>
         ) : (
           <p className='text-red-500 whitespace-no-wrap'>Unavailable</p>
@@ -79,7 +81,7 @@ const UserDataRow = ({ user, refetch }) => {
           <span className='relative'>Update Role</span>
         </button>
         {/* Update User Modal */}
-        <UpdateUserModal
+        <UpdateUserRoleModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           modalHandler={modalHandler}

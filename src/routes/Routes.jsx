@@ -16,6 +16,8 @@ import Profile from '../pages/Dashboard/Common/Profile'
 import RequestedMeals from '../pages/Dashboard/Guest/RequestedMeals'
 import MyReviews from '../pages/Dashboard/Guest/MyReviews'
 import PaymentHistory from '../pages/Dashboard/Guest/PaymentHistory'
+import AddMeal from '../pages/Dashboard/Admin/AddMeal'
+import AllMealsTable from '../pages/Dashboard/Admin/AllMealsTable'
 
 export const router = createBrowserRouter([
   {
@@ -56,16 +58,7 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      // {
-      //   path: 'my-listings',
-      //   element: (
-      //     <PrivateRoute>
-      //       <HostRoute>
-      //         <MyListings />
-      //       </HostRoute>
-      //     </PrivateRoute>
-      //   ),
-      // },
+      // admin routes
       {
         path: 'manage-users',
         element: (
@@ -76,6 +69,27 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: 'add-meal',
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <AddMeal />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'all-meals',
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <AllMealsTable />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      // guest route
       {
         path: 'requested-meals',
         element: (
