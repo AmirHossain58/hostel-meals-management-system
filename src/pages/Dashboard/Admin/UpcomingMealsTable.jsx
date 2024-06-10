@@ -6,7 +6,8 @@ import LoadingSpinner from '../../../components/Shared/LoadingSpinner'
 import toast from 'react-hot-toast'
 import AllMealsDataRow from '../../../components/Dashboard/TableRows/AllMealsDataRow'
 import { useState } from 'react'
-const AllMealsTable = () => {
+import UpcomingMealsDataRow from '../../../components/Dashboard/TableRows/UpcomingMealsDataRow'
+const UpcomingMealsTable = () => {
   const [sortLikes, setSortLikes] = useState('')
   const [sortReviews, setSortReviews] = useState('')
   const { user } = useAuth()
@@ -74,19 +75,7 @@ console.log(meals);
             </select>
           </div>
           <div>
-            <select
-              onChange={e => {
-                setSortReviews(e.target.value)
-              }}
-              value={sortReviews}
-              name='sort'
-              id='sort'
-              className='border p-4 rounded-md'
-            >
-              <option value=''>Sort By Reviews Count</option>
-              <option value='dsc'>Descending Order</option>
-              <option value='asc'>Ascending Order</option>
-            </select>
+           <button className="btn font-bold bg-red-100">Add Upcoming Meal</button>
           </div>
         </div>
           </div>
@@ -95,6 +84,12 @@ console.log(meals);
               <table className='min-w-full leading-normal'>
                 <thead>
                   <tr>
+                    <th
+                      scope='col'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                    >
+                      #
+                    </th>
                     <th
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
@@ -123,28 +118,18 @@ console.log(meals);
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
-                      update
+                      action
                     </th>
-                    <th
-                      scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                    >
-                      Delete
-                    </th>
-                    <th
-                      scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                    >
-                      view meal
-                    </th>
+                 
                   </tr>
                 </thead>
                 <tbody>
                   {/* Meal row data */}
 
-                  {meals.map(meal => (
-                    <AllMealsDataRow
+                  {meals.map((meal,i) => (
+                    <UpcomingMealsDataRow
                       key={meal._id}
+                      i={i}
                       meal={meal}
                       handleDelete={handleDelete}
                       refetch={refetch}
@@ -160,4 +145,4 @@ console.log(meals);
   )
 }
 
-export default AllMealsTable
+export default UpcomingMealsTable

@@ -11,7 +11,7 @@ import DeleteModal from '../../Modal/DeleteModal'
 import { Link } from 'react-router-dom'
 import { GrFormView } from 'react-icons/gr'
 import UpdateMealModal from '../../Modal/UpdateMealModal'
-const AllMealsDataRow = ({ meal, handleDelete, refetch }) => {
+const UpcomingMealsDataRow = ({ meal, handleDelete, refetch ,i}) => {
   // for delete modal
   const [isOpen, setIsOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
@@ -22,6 +22,9 @@ const AllMealsDataRow = ({ meal, handleDelete, refetch }) => {
   // for update modal
   return (
     <tr>
+         <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+        <p className='text-gray-900 whitespace-no-wrap'>{i+1}</p>
+      </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <div className='flex items-center'>
           <div className='flex-shrink-0'>
@@ -51,36 +54,16 @@ const AllMealsDataRow = ({ meal, handleDelete, refetch }) => {
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <button
-          onClick={() => setIsEditModalOpen(true)}
+              onClick={() => setIsOpen(true)}
           className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'
         >
           <span
             aria-hidden='true'
             className='absolute inset-0 bg-green-200 opacity-50 rounded-full'
           ></span>
-          <span className='relative'>Update</span>
+          <span className='relative'>Publish</span>
         </button>
         {/* Update Modal */}
-        <UpdateMealModal
-          isOpen={isEditModalOpen}
-          setIsEditModalOpen={setIsEditModalOpen}
-          meal={meal}
-          refetch={refetch}
-        />
-      </td>
-     
-      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <button
-          onClick={() => setIsOpen(true)}
-          className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'
-        >
-          <span
-            aria-hidden='true'
-            className='absolute inset-0 bg-red-200 opacity-50 rounded-full'
-          ></span>
-          <span className='relative'>Delete</span>
-        </button>
-        {/* Delete modal */}
         <DeleteModal
           isOpen={isOpen}
           closeModal={closeModal}
@@ -88,23 +71,15 @@ const AllMealsDataRow = ({ meal, handleDelete, refetch }) => {
           id={meal?._id}
         />
       </td>
-      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-      <Link className='' to={`/meals/${meal?._id}`}>
-            
-            <p className='text-black  whitespace-no-wrap flex items-center gap-1 relative cursor-pointer px-3 py-1 font-semibold  leading-tight  bg-gray-200 opacity-50 rounded-full'>
-            <GrFormView className='text-lg' /> View
-            </p>
-            </Link>
-      </td>
      
     </tr>
   )
 }
 
-AllMealsDataRow.propTypes = {
+UpcomingMealsDataRow.propTypes = {
   meal: PropTypes.object,
   refetch: PropTypes.func,
   handleDelete: PropTypes.func,
 }
 
-export default AllMealsDataRow
+export default UpcomingMealsDataRow

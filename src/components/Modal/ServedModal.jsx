@@ -7,7 +7,7 @@ import {
   } from '@headlessui/react'
   import { Fragment } from 'react'
   import PropTypes from 'prop-types'
-  const DeleteModal = ({ closeModal, isOpen, handleDelete, meal,}) => {
+  const ServedModal = ({ closeModal, isOpen, handleDelete, meal,}) => {
     return (
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as='div' className='relative z-10' onClose={closeModal}>
@@ -39,11 +39,11 @@ import {
                     as='h3'
                     className='text-lg font-medium leading-6 text-gray-900'
                   >
-                    Are you sure?
+                    Is Meal Delivered Successfully?
                   </DialogTitle>
                   <div className='mt-2'>
                     <p className='text-sm text-gray-500'>
-                      You cannot undo once it&apos;s done!
+                      You can Change status to delivered!
                     </p>
                   </div>
                   <hr className='mt-8 ' />
@@ -75,11 +75,11 @@ import {
     )
   }
   
-  DeleteModal.propTypes = {
+  ServedModal.propTypes = {
     closeModal: PropTypes.func,
     isOpen: PropTypes.bool,
     handleDelete: PropTypes.func,
     id: PropTypes.string,
   }
   
-  export default DeleteModal
+  export default ServedModal

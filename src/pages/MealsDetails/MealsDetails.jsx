@@ -58,6 +58,10 @@ const MealsDetails = () => {
       const res = await axiosSecure.put(`/meals/review/${id}`, updateData);
       return res.data;
     },
+    onSuccess:async()=>{
+      const res = await axiosSecure.put(`/meals/update/${id}`,{reviewCount:(parseInt(meal.reviewCount)+1)});
+      return res.data;
+    }
   });
   const handleLike = async () => {
     if (user && user.email) {
@@ -166,7 +170,8 @@ const MealsDetails = () => {
       ...mealInfo,
       mealId:mealInfo?._id,
       status:"pending",
-      requesterEmail:user?.email
+      requesterEmail:user?.email,
+      requesterName:user?.displayName
     }
   delete requestMealInfo?._id
     console.log(requestMealInfo);
@@ -180,6 +185,7 @@ const MealsDetails = () => {
           showConfirmButton: false,
           timer: 1500
         });
+        setIsOpenReq(false)
       }
       console.log(res.data);
     }
@@ -255,7 +261,7 @@ const MealsDetails = () => {
               "
                 >
                   Ingredients:{" "}
-                  {meal?.ingredients?.map((data, i) => (
+                  {meal?.ingredients.length>0&&meal?.ingredients?.map((data, i) => (
                     <div key={i}>{data} </div>
                   ))}
                 </div>
@@ -287,7 +293,7 @@ const MealsDetails = () => {
                   className={`btn w-1/2 text-xl font-bold flex justify-center items-center`}
                 >
                   <MdOutlineReviews className="text-2xl" /> Review{" "}
-                  {meal?.reviews?.length}
+                  {meal?.reviewCount}
                 </button>
                 <ReviewModal
                   handleSubmit={handleReview}

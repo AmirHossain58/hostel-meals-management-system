@@ -74,6 +74,7 @@ const AddMeal = () => {
           console.table(mealData)
           //   Post request to server
           await mutateAsync(mealData)
+          setLoading(false)
         } catch (err) {
           console.log(err)
           toast.error(err.message)
@@ -92,12 +93,11 @@ const AddMeal = () => {
     return (
       <>
         <Helmet>
-          <title>Add Room | Dashboard</title>
+          <title>Add Meal | Dashboard</title>
         </Helmet>
   
         {/* Form */}
         <AddMealForm
-          dates={dates}
           handleDates={handleDates}
           handleSubmit={handleSubmit}
           register={register}

@@ -48,11 +48,11 @@ const reviewId=myReview?.review?.reviewId
   })
 
   //  Handle Delete
-  const handleDelete = async id => {
-    
-    console.log(id)
+  const handleDelete = async meal => {
+    const id=meal?.mealId
+   
     try {
-      await mutateAsync(id)
+      await mutateAsync(id,reviewId)
     } catch (err) {
       console.log(err)
     }
@@ -129,7 +129,7 @@ const reviewId=myReview?.review?.reviewId
           handleDelete={handleDelete}
           closeModal={closeModal}
           isOpen={isOpen}
-          id={myReview?.mealId}
+          meal={myReview}
         />
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>

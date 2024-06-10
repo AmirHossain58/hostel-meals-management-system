@@ -78,7 +78,7 @@ const PaymentHistory = () => {
                   </tbody>
                 </table>
                 {
-                !payments&&<p className='text-center text-xl md:text-4xl'>No payment history found.</p>}
+                payments.length===0&&<p className='text-center text-xl md:text-4xl'>No payment history found.</p>}
               </div>
             </div>
           </div>

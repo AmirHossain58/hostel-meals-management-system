@@ -6,7 +6,8 @@ import LoadingSpinner from '../../../components/Shared/LoadingSpinner'
 import toast from 'react-hot-toast'
 import AllMealsDataRow from '../../../components/Dashboard/TableRows/AllMealsDataRow'
 import { useState } from 'react'
-const AllMealsTable = () => {
+import AllReviewsDataRow from '../../../components/Dashboard/TableRows/AllReviewsDataRow'
+const AllReviews = () => {
   const [sortLikes, setSortLikes] = useState('')
   const [sortReviews, setSortReviews] = useState('')
   const { user } = useAuth()
@@ -17,36 +18,14 @@ const AllMealsTable = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ['all-meals',sortLikes,sortReviews ],
+    queryKey: ['all-reviews'],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/meals?sortLikes=${sortLikes}&sortReviews=${sortReviews}`)
+      const { data } = await axiosSecure.get(`/reviews`)
       return data
     },
   })
-console.log(meals);
-  //   delete
-  const { mutateAsync } = useMutation({
-    mutationFn: async id => {
-      const { data } = await axiosSecure.delete(`/meals/${id}`)
-      
-      return data
-    },
-    onSuccess: data => {
-      console.log(data)
-      refetch()
-      toast.success('Successfully deleted.')
-    },
-  })
+// console.log(meals);
 
-  //  Handle Delete
-  const handleDelete = async id => {
-    console.log(id)
-    try {
-      await mutateAsync(id)
-    } catch (err) {
-      console.log(err)
-    }
-  }
   if (isLoading) return <LoadingSpinner />
   return (
     <>
@@ -57,44 +36,18 @@ console.log(meals);
       <div className='container mx-auto px-4 sm:px-8'>
         
         <div className='py-8'>
-          <div className='flex justify-center gap-2 md:gap-10'>
-          <div>
-            <select
-              onChange={e => {
-                setSortLikes(e.target.value)
-              }}
-              value={sortLikes}
-              name='sort'
-              id='sort'
-              className='border p-4 rounded-md'
-            >
-              <option value=''>Sort By  Likes Count</option>
-              <option value='dsc'>Descending Order</option>
-              <option value='asc'>Ascending Order</option>
-            </select>
-          </div>
-          <div>
-            <select
-              onChange={e => {
-                setSortReviews(e.target.value)
-              }}
-              value={sortReviews}
-              name='sort'
-              id='sort'
-              className='border p-4 rounded-md'
-            >
-              <option value=''>Sort By Reviews Count</option>
-              <option value='dsc'>Descending Order</option>
-              <option value='asc'>Ascending Order</option>
-            </select>
-          </div>
-        </div>
           </div>
           <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
             <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
               <table className='min-w-full leading-normal'>
                 <thead>
                   <tr>
+                    <th
+                      scope='col'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                    >
+                      #
+                    </th>
                     <th
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
@@ -117,13 +70,7 @@ console.log(meals);
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
-                     distributor
-                    </th>
-                    <th
-                      scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                    >
-                      update
+                     reviews count
                     </th>
                     <th
                       scope='col'
@@ -142,11 +89,11 @@ console.log(meals);
                 <tbody>
                   {/* Meal row data */}
 
-                  {meals.map(meal => (
-                    <AllMealsDataRow
-                      key={meal._id}
+                  {meals?.map((meal ,i) => (
+                    <AllReviewsDataRow
+                      key={i}
+                      i={i}
                       meal={meal}
-                      handleDelete={handleDelete}
                       refetch={refetch}
                     />
                   ))}
@@ -160,4 +107,4 @@ console.log(meals);
   )
 }
 
-export default AllMealsTable
+export default AllReviews

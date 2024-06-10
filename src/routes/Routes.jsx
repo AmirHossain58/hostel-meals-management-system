@@ -18,6 +18,9 @@ import MyReviews from '../pages/Dashboard/Guest/MyReviews'
 import PaymentHistory from '../pages/Dashboard/Guest/PaymentHistory'
 import AddMeal from '../pages/Dashboard/Admin/AddMeal'
 import AllMealsTable from '../pages/Dashboard/Admin/AllMealsTable'
+import AllReviews from '../pages/Dashboard/Admin/AllReviews'
+import ServeMeals from '../pages/Dashboard/Admin/ServeMeals'
+import UpcomingMealsTable from '../pages/Dashboard/Admin/UpcomingMealsTable'
 
 export const router = createBrowserRouter([
   {
@@ -85,6 +88,36 @@ export const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoute>
               <AllMealsTable />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'all-reviews',
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <AllReviews />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'serve-meals',
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ServeMeals />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'upcoming-meals',
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <UpcomingMealsTable />
             </AdminRoute>
           </PrivateRoute>
         ),

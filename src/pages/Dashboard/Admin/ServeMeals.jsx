@@ -6,89 +6,60 @@ import LoadingSpinner from '../../../components/Shared/LoadingSpinner'
 import toast from 'react-hot-toast'
 import AllMealsDataRow from '../../../components/Dashboard/TableRows/AllMealsDataRow'
 import { useState } from 'react'
-const AllMealsTable = () => {
-  const [sortLikes, setSortLikes] = useState('')
-  const [sortReviews, setSortReviews] = useState('')
+import AllReviewsDataRow from '../../../components/Dashboard/TableRows/AllReviewsDataRow'
+import ServeMealsDataRow from '../../../components/Dashboard/TableRows/ServeMealsDataRow'
+const ServeMeals = () => {
+    const [search, setSearch] = useState('')
+  const [searchText, setSearchText] = useState('')
   const { user } = useAuth()
   const axiosSecure = useAxiosSecure()
   //   Fetch Rooms Data
   const {
-    data: meals = [],
+    data: requestedMeals = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ['all-meals',sortLikes,sortReviews ],
+    queryKey: ['all-requested-meal',search],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/meals?sortLikes=${sortLikes}&sortReviews=${sortReviews}`)
+      const { data } = await axiosSecure.get(`/requested-meals?search=${search}`)
       return data
     },
   })
-console.log(meals);
-  //   delete
-  const { mutateAsync } = useMutation({
-    mutationFn: async id => {
-      const { data } = await axiosSecure.delete(`/meals/${id}`)
-      
-      return data
-    },
-    onSuccess: data => {
-      console.log(data)
-      refetch()
-      toast.success('Successfully deleted.')
-    },
-  })
+  const handleSearch = e => {
+    e.preventDefault()
 
-  //  Handle Delete
-  const handleDelete = async id => {
-    console.log(id)
-    try {
-      await mutateAsync(id)
-    } catch (err) {
-      console.log(err)
-    }
+    setSearch(searchText)
   }
   if (isLoading) return <LoadingSpinner />
   return (
     <>
       <Helmet>
-        <title>My Listings</title>
+        <title>Dashboard | Serve Meals</title>
       </Helmet>
 
       <div className='container mx-auto px-4 sm:px-8'>
         
         <div className='py-8'>
-          <div className='flex justify-center gap-2 md:gap-10'>
-          <div>
-            <select
-              onChange={e => {
-                setSortLikes(e.target.value)
-              }}
-              value={sortLikes}
-              name='sort'
-              id='sort'
-              className='border p-4 rounded-md'
-            >
-              <option value=''>Sort By  Likes Count</option>
-              <option value='dsc'>Descending Order</option>
-              <option value='asc'>Ascending Order</option>
-            </select>
+            
           </div>
-          <div>
-            <select
-              onChange={e => {
-                setSortReviews(e.target.value)
-              }}
-              value={sortReviews}
-              name='sort'
-              id='sort'
-              className='border p-4 rounded-md'
-            >
-              <option value=''>Sort By Reviews Count</option>
-              <option value='dsc'>Descending Order</option>
-              <option value='asc'>Ascending Order</option>
-            </select>
-          </div>
-        </div>
+          <div className=' flex justify-center'>
+          <form onSubmit={handleSearch}>
+            <div className='flex p-1 overflow-hidden border rounded-lg    focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300'>
+              <input
+                className='px-6 py-2 text-gray-700 placeholder-gray-500 bg-white outline-none focus:placeholder-transparent'
+                type='text'
+                onChange={e => setSearchText(e.target.value)}
+                value={searchText}
+                name='search'
+                placeholder='Enter username or email'
+                aria-label='Enter username or email'
+              />
+
+              <button className='px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:bg-gray-600 focus:outline-none'>
+                Search
+              </button>
+            </div>
+          </form>
           </div>
           <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
             <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
@@ -99,54 +70,49 @@ console.log(meals);
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
+                      #
+                    </th>
+                    <th
+                      scope='col'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                    >
                       Title
                     </th>
                     <th
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
-                      likes
+                      email
                     </th>
                     <th
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
-                      reviews
+                      name
                     </th>
                     <th
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
-                     distributor
+                     status
                     </th>
                     <th
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
-                      update
+                      action
                     </th>
-                    <th
-                      scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                    >
-                      Delete
-                    </th>
-                    <th
-                      scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                    >
-                      view meal
-                    </th>
+                    
                   </tr>
                 </thead>
                 <tbody>
                   {/* Meal row data */}
 
-                  {meals.map(meal => (
-                    <AllMealsDataRow
-                      key={meal._id}
-                      meal={meal}
-                      handleDelete={handleDelete}
+                  {requestedMeals?.map((requestedMeal ,i) => (
+                    <ServeMealsDataRow
+                      key={i}
+                      i={i}
+                      requestedMeal={requestedMeal}
                       refetch={refetch}
                     />
                   ))}
@@ -160,4 +126,4 @@ console.log(meals);
   )
 }
 
-export default AllMealsTable
+export default ServeMeals
