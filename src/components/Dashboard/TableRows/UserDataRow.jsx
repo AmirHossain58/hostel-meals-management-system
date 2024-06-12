@@ -7,6 +7,7 @@ import toast from 'react-hot-toast'
 import useAuth from '../../../hooks/useAuth'
 import UpdateUserRoleModal from '../../Modal/UpdateUserRoleModal'
 const UserDataRow = ({ user, refetch }) => {
+  console.log(user);
   const { user: loggedInUser } = useAuth()
 
   const [isOpen, setIsOpen] = useState(false)
@@ -49,24 +50,17 @@ const UserDataRow = ({ user, refetch }) => {
   return (
     <tr>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 whitespace-no-wrap'>{user?.displayName}</p>
+        <p className='text-gray-900 whitespace-no-wrap'>{user?.name}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <p className='text-gray-900 whitespace-no-wrap'>{user?.email}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 whitespace-no-wrap'>{user?.role.slice(0,1).toUpperCase()+user?.role.slice(1)}</p>
-      </td>
-      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        {user?.status ? (
           <p
             className={`whitespace-no-wrap`}
           >
-            {user?.badge.slice(0,1).toUpperCase()+user?.badge.slice(1)}
+            {user?.badge?.slice(0,1)?.toUpperCase()+user?.badge?.slice(1)}
           </p>
-        ) : (
-          <p className='text-red-500 whitespace-no-wrap'>Unavailable</p>
-        )}
       </td>
 
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>

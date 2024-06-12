@@ -9,15 +9,20 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import ForgotPasswordModal from "../../../components/Modal/ForgotPasswordModal";
+
 
 const Profile = () => {
-  const { user, loading, updateUserProfile } = useAuth() || {};
-  const navigate = useNavigate()
+  const [isOpenPass,setIsOpenPass]=useState(false)
+  const [email,setEmail]=useState('')
+
+  const { user, loading, updateUserProfile,resetPassword } = useAuth() || {};
   const axiosSecure = useAxiosSecure()
   const[name,setName]=useState(user?.displayName)
   const[image,setImage]=useState(user?.photoURL)
   const [imagePreview, setImagePreview] = useState(user?.photoURL)
   const [imageText, setImageText] = useState('Upload Image')
+  const [imageFile, setImageFile] = useState()
   const [isOpen, setIsOpen] = useState(false);
   const [role, isLoading] = useBadge();
   const{data}=useQuery({
@@ -27,7 +32,6 @@ const Profile = () => {
       return res.data
     }
   })
-  console.log(data);
   //   Form handler
   const handleSubmit = async e => {
     e.preventDefault()
@@ -35,21 +39,35 @@ const Profile = () => {
     console.log(image);
 
     try {
-      if(image){
-        const image_url = await imageUpload(image)
-        setImage(image_url)
+      if(imageFile){
+        const image_url = await imageUpload(imageFile)
+        console.log(image_url);
+        await updateUserProfile(name,image_url)
+      }else{
+        await updateUserProfile(name,image)
       }
       console.log(name,image);
-     await updateUserProfile(name,image_url)
+     setIsOpen(false)
     } catch (err) {
       console.log(err)
       toast.error(err.message)
     }
   }
   const handleImage = image => {
-    setImage(image)
+    setImageFile(image)
     setImagePreview(URL.createObjectURL(image))
     setImageText(image.name)
+  }
+
+  const handleResetPassword= async()=>{
+    if(!email)return toast.error('please give your email first')
+    try{
+      await resetPassword(email)
+      toast.success('Checked your Email')
+     }catch(err){
+       console.log(err);
+       toast.error(err.message)
+     }
   }
   if (isLoading || loading) return <LoadingSpinner />;
   return (
@@ -72,8 +90,8 @@ const Profile = () => {
             />
           </a>
 
-          <p className="p-2 uppercase px-4 text-xs text-white bg-gray-500 rounded-full">
-            {role.role}
+          <p className="p-2 uppercase px-4 text-xs text-white bg-gray-400 rounded-full">
+            {role.role.slice(0,1).toUpperCase()+role.role.slice(1,)}
           </p>
          
           <p className="mt-2 text-xl font-medium text-gray-800 ">
@@ -99,10 +117,11 @@ const Profile = () => {
               <div>
                 <button
                 onClick={()=>setIsOpen(true)}
-                className="bg-[#f39cab] px-10 py-1 rounded-lg text-white cursor-pointer hover:bg-[#4d4949] block mb-1">
+                className="bg-rose-100 px-10 py-1 rounded-lg text-black cursor-pointer hover:bg-rose-200 block mb-2">
                   Update Profile
                 </button>
                 <UpdateUserModal
+                setImageFile={setImageFile}
                 name={name}
                 setName={setName}
                  handleSubmit={handleSubmit}
@@ -114,9 +133,17 @@ const Profile = () => {
                   isOpen={isOpen}
                   setIsOpen={setIsOpen}
                 ></UpdateUserModal>
-                <button className="bg-[#F43F5E] px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-[#c4213c]">
+                <button
+                onClick={()=>setIsOpenPass(true)}
+                className="bg-rose-100 px-7 py-1 rounded-lg text-black  cursor-pointer hover:bg-rose-200">
                   Change Password
                 </button>
+                <ForgotPasswordModal
+                setEmail={setEmail}
+                handleResetPassword={handleResetPassword}
+                isOpen={isOpenPass}
+                setIsOpen={setIsOpenPass}
+                ></ForgotPasswordModal>
               </div>
             </div>
           </div>

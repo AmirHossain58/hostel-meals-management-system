@@ -21,6 +21,8 @@ import AllMealsTable from '../pages/Dashboard/Admin/AllMealsTable'
 import AllReviews from '../pages/Dashboard/Admin/AllReviews'
 import ServeMeals from '../pages/Dashboard/Admin/ServeMeals'
 import UpcomingMealsTable from '../pages/Dashboard/Admin/UpcomingMealsTable'
+import UpcomingMeals from '../pages/UpcomingMeals/UpcomingMeals'
+import UpcomingMealsDetails from '../pages/UpcomingMeals/UpcomingMealsDetails'
 
 export const router = createBrowserRouter([
   {
@@ -37,8 +39,16 @@ export const router = createBrowserRouter([
         element: <MealsDetails />,
       },
       {
+        path: '/upcomingMeals/:id',
+        element: <UpcomingMealsDetails />,
+      },
+      {
         path: '/meals',
         element: <AllMeals/>,
+      },
+      {
+        path: '/upcomingMeals',
+        element: <UpcomingMeals/>,
       },
       {
         path: '/checkout/:pack',

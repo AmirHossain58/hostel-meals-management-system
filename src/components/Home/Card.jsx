@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-const Card = ({ meals }) => {
+const Card = ({ meals,address }) => {
   return (
-    <Link to={`/meals/${meals?._id}`} className='col-span-1  border  p-2  rounded-lg cursor-pointer group'>
+    <Link to={`${address?address:'/meals'}/${meals?._id}`} className='col-span-1  border  p-2  rounded-lg cursor-pointer group'>
       <div className='flex flex-col gap-2 w-full'>
         <div
           className='

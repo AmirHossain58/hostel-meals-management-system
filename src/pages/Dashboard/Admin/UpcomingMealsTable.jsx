@@ -7,7 +7,9 @@ import toast from 'react-hot-toast'
 import AllMealsDataRow from '../../../components/Dashboard/TableRows/AllMealsDataRow'
 import { useState } from 'react'
 import UpcomingMealsDataRow from '../../../components/Dashboard/TableRows/UpcomingMealsDataRow'
+import AddUpcomingMealModal from '../../../components/Modal/AddUpcomingMealModal'
 const UpcomingMealsTable = () => {
+    const [isOpen,setIsOpen]=useState(false)
   const [sortLikes, setSortLikes] = useState('')
   const [sortReviews, setSortReviews] = useState('')
   const { user } = useAuth()
@@ -75,7 +77,14 @@ console.log(meals);
             </select>
           </div>
           <div>
-           <button className="btn font-bold bg-red-100">Add Upcoming Meal</button>
+           <button
+           onClick={()=>setIsOpen(true)}
+            className="btn text-lg bg-red-100">Add Upcoming Meal</button>
+           {/* Add Upcoming Meal modal */}
+           <AddUpcomingMealModal
+           isOpen={isOpen}
+           setIsEditModalOpen={setIsOpen}
+           ></AddUpcomingMealModal>
           </div>
         </div>
           </div>

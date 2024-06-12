@@ -6,32 +6,32 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { TbFidgetSpinner } from "react-icons/tb";
 import { ImSpinner10 } from 'react-icons/im';
-
+import { useForm } from "react-hook-form";
 const SignUp = () => {
   const location=useLocation()
   const navigate=useNavigate()
   const from=location?.state||'/'
   const {createUser,updateUserProfile,signInWithGoogle,loading,setLoading}=useAuth()
-  const handleSubmit=async(e)=>{
-e.preventDefault()
-const form=e.target
-const name=form.name.value
-const email=form.email.value
-const password=form.password.value
-const image=form.image.files[0]
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit =async data => {
+const name=data.name
+const email=data.email
+const password=data.password
+const image=data.image[0]
+console.log(name,email,password,image);
 
 const formData=new FormData()
 formData.append('image',image)
 try{
   setLoading(true)
   // 1. Upload image and get image url
-  const { data } = await axios.post(
+  const {data: imgData }= await axios.post(
     `https://api.imgbb.com/1/upload?key=${
       import.meta.env.VITE_IMAGE_HOSTING_KEY
     }`,
     formData
   )
-const image=data.data.display_url
+  const image=imgData?.data?.display_url
 //2 register
 const result= await createUser(email,password)
 // 3. save user name and photo
@@ -43,7 +43,9 @@ toast.success('SignUp Successfully')
   console.log(err);
   toast.error(err.message)
 }
-}
+    console.log(data)
+  };
+ 
 const handleSignInWithGoogle=async()=>{
   try{
    await signInWithGoogle()
@@ -62,7 +64,7 @@ const handleSignInWithGoogle=async()=>{
           <p className='text-sm text-gray-400'>Welcome to University Hostel</p>
         </div>
         <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
           noValidate=''
           action=''
           className='space-y-6 ng-untouched ng-pristine ng-valid'
@@ -79,7 +81,9 @@ const handleSignInWithGoogle=async()=>{
                 placeholder='Enter Your Name Here'
                 className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
                 data-temp-mail-org='0'
-              />
+                {...register("name", { required: true })} />
+                {/* errors will return when field validation fails  */}
+                {errors.name && <span className='text-red-700'>This field is required</span>}
             </div>
             <div>
               <label htmlFor='image' className='block mb-2 text-sm'>
@@ -91,7 +95,9 @@ const handleSignInWithGoogle=async()=>{
                 id='image'
                 name='image'
                 accept='image/*'
-              />
+                {...register("image", { required: true })} />
+                {/* errors will return when field validation fails  */}
+                {errors.image && <span className='text-red-700'>This field is required</span>}
             </div>
             <div>
               <label htmlFor='email' className='block mb-2 text-sm'>
@@ -105,7 +111,9 @@ const handleSignInWithGoogle=async()=>{
                 placeholder='Enter Your Email Here'
                 className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
                 data-temp-mail-org='0'
-              />
+                {...register("email", { required: true })} />
+                {/* errors will return when field validation fails  */}
+                {errors.email && <span className='text-red-700'>This field is required</span>}
             </div>
             <div>
               <div className='flex justify-between'>
@@ -121,7 +129,9 @@ const handleSignInWithGoogle=async()=>{
                 required
                 placeholder='*******'
                 className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
-              />
+                {...register("password", { required: true })} />
+                {/* errors will return when field validation fails  */}
+                {errors.password && <span className='text-red-700'>This field is required</span>}
             </div>
           </div>
 

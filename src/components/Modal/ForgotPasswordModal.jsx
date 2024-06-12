@@ -104,6 +104,7 @@ const ForgotPasswordModal = ({ setIsOpen, isOpen,loading,setEmail,handleResetPas
 
 ForgotPasswordModal.propTypes = {
     setIsOpen: PropTypes.func,
+    handleResetPassword: PropTypes.func,
     setEmail: PropTypes.func,
   isOpen: PropTypes.bool,
 }
