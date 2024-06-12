@@ -18,7 +18,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import useAuth from '../../hooks/useAuth'
-const AddUpcomingMealModal = ({ setIsEditModalOpen, isOpen, meal, refetch }) => {
+const AddUpcomingMealModal = ({ setIsOpen, isOpen, meal, refetch }) => {
     const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
     const [loading, setLoading] = useState(false)
@@ -30,14 +30,16 @@ const AddUpcomingMealModal = ({ setIsEditModalOpen, isOpen, meal, refetch }) => 
   
     const { mutateAsync } = useMutation({
       mutationFn: async mealData => {
-        const { data } = await axiosSecure.post(`/meals`, mealData)
+        const { data } = await axiosSecure.post(`/upcoming-meals`, mealData)
         return data
       },
       onSuccess: () => {
         console.log('Data Saved Successfully')
         toast.success(' Meal Added Successfully!')
-        navigate('/dashboard/all-meals')
+        refetch()
         setLoading(false)
+        setIsOpen(false)
+
       },
     })
   
@@ -96,7 +98,7 @@ const AddUpcomingMealModal = ({ setIsEditModalOpen, isOpen, meal, refetch }) => 
       <Dialog
         as='div'
         className='relative z-10'
-        onClose={() => setIsEditModalOpen(false)}
+        onClose={() => setIsOpen(false)}
       >
         <TransitionChild
           as={Fragment}
@@ -147,7 +149,7 @@ const AddUpcomingMealModal = ({ setIsEditModalOpen, isOpen, meal, refetch }) => 
                   <button
                     type='button'
                     className='inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2'
-                    onClick={() => setIsEditModalOpen(false)}
+                    onClick={() => setIsOpen(false)}
                   >
                     Cancel
                   </button>

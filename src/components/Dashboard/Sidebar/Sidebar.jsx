@@ -34,13 +34,7 @@ const Sidebar = () => {
         <div>
           <div className="block cursor-pointer p-4 font-bold">
             <Link to="/">
-              <img
-                // className='hidden md:block'
-                // src="https://i.ibb.co/4ZXzmq5/logo.png"
-                alt="logo"
-                width="100"
-                height="100"
-              />
+            Hostel Meals
             </Link>
           </div>
         </div>

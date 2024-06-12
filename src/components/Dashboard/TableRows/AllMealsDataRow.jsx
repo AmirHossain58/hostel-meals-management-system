@@ -85,7 +85,7 @@ const AllMealsDataRow = ({ meal, handleDelete, refetch }) => {
           isOpen={isOpen}
           closeModal={closeModal}
           handleDelete={handleDelete}
-          id={meal?._id}
+          meal={meal}
         />
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>

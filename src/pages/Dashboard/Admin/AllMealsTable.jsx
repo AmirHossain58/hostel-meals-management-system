@@ -39,10 +39,10 @@ console.log(meals);
   })
 
   //  Handle Delete
-  const handleDelete = async id => {
-    console.log(id)
+  const handleDelete = async meal => {
+    console.log(meal?._id)
     try {
-      await mutateAsync(id)
+      await mutateAsync(meal?._id)
     } catch (err) {
       console.log(err)
     }

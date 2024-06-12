@@ -96,8 +96,8 @@ const AddMealForm = ({
                   </label>
                 </div>
               </div>
-              <div className='h-16 w-16 object-cover overflow-hidden flex items-center'>
-                {imagePreview && <img src={imagePreview} />}
+              <div className='h-16 w-16 border object-cover overflow-hidden flex items-center'>
+                {imagePreview && <img className='' src={imagePreview} />}
               </div>
             </div>
             <div className=''>

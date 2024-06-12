@@ -11,7 +11,6 @@ import AddUpcomingMealModal from '../../../components/Modal/AddUpcomingMealModal
 const UpcomingMealsTable = () => {
     const [isOpen,setIsOpen]=useState(false)
   const [sortLikes, setSortLikes] = useState('')
-  const [sortReviews, setSortReviews] = useState('')
   const { user } = useAuth()
   const axiosSecure = useAxiosSecure()
   //   Fetch Rooms Data
@@ -20,32 +19,44 @@ const UpcomingMealsTable = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ['all-meals',sortLikes,sortReviews ],
+    queryKey: ['all-meals',sortLikes],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/meals?sortLikes=${sortLikes}&sortReviews=${sortReviews}`)
+      const { data } = await axiosSecure.get(`/upcoming-meals?sortLikes=${sortLikes}`)
       return data
     },
   })
-console.log(meals);
   //   delete
   const { mutateAsync } = useMutation({
-    mutationFn: async id => {
-      const { data } = await axiosSecure.delete(`/meals/${id}`)
+    mutationFn: async (mealData)=> {
+      console.log(mealData);
+      const { data } = await axiosSecure.post(`/meals`,mealData)
       
       return data
     },
-    onSuccess: data => {
-      console.log(data)
-      refetch()
-      toast.success('Successfully deleted.')
+    onSuccess:async data => {
+      
+      toast.success('Successfully Publish.')
     },
   })
 
   //  Handle Delete
-  const handleDelete = async id => {
-    console.log(id)
+  const handlePublish = async meal => {
+    console.log(meal)
+    const id =meal?._id
+    const mealData={
+      ...meal
+    }
+    delete mealData?._id
+    console.log(mealData);
     try {
-      await mutateAsync(id)
+     const res =await mutateAsync(mealData)
+     console.log(res);
+     if(res?.insertedId){
+      const res = await axiosSecure.delete(`/upcoming-meals/${id}`)
+      if(res?.data?.deletedCount>1){
+        refetch()
+      }
+     }
     } catch (err) {
       console.log(err)
     }
@@ -82,8 +93,9 @@ console.log(meals);
             className="btn text-lg bg-red-100">Add Upcoming Meal</button>
            {/* Add Upcoming Meal modal */}
            <AddUpcomingMealModal
+           refetch={refetch}
            isOpen={isOpen}
-           setIsEditModalOpen={setIsOpen}
+           setIsOpen={setIsOpen}
            ></AddUpcomingMealModal>
           </div>
         </div>
@@ -140,7 +152,7 @@ console.log(meals);
                       key={meal._id}
                       i={i}
                       meal={meal}
-                      handleDelete={handleDelete}
+                      handleDelete={handlePublish}
                       refetch={refetch}
                     />
                   ))}

@@ -14,7 +14,6 @@ import UpdateMealModal from '../../Modal/UpdateMealModal'
 const UpcomingMealsDataRow = ({ meal, handleDelete, refetch ,i}) => {
   // for delete modal
   const [isOpen, setIsOpen] = useState(false)
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const closeModal = () => {
     setIsOpen(false)
   }
@@ -63,12 +62,12 @@ const UpcomingMealsDataRow = ({ meal, handleDelete, refetch ,i}) => {
           ></span>
           <span className='relative'>Publish</span>
         </button>
-        {/* Update Modal */}
+        {/* publish Modal */}
         <DeleteModal
           isOpen={isOpen}
           closeModal={closeModal}
           handleDelete={handleDelete}
-          id={meal?._id}
+          meal={meal}
         />
       </td>
      
