@@ -42,21 +42,13 @@ const Navbar = () => {
         <Container>
           <div className="flex flex-row  items-center justify-between gap-3 md:gap-0">
             {/* Logo */}
-            <Link to="/">Hostel Management</Link>
+            <Link to="/" className="bg-[#e46f6c] text-white p-2 md:p-3 md:text-lg md:font-bold rounded">Hostel Meals Management</Link>
             {/* Dropdown Menu */}
             <div className="relative">
               <div className="flex flex-row items-center gap-3">
                 {/* Become A Host btn */}
                 <div className="hidden md:block">
                   {navLink}
-                  {/* {!user && (
-                    <button
-                      disabled={!user}
-                      className='disabled:cursor-not-allowed cursor-pointer hover:bg-neutral-100 py-3 px-4 text-sm font-semibold rounded-full  transition'
-                    >
-                      Host your home
-                    </button>
-                  )} */}
                 </div>
                 {/* Dropdown btn */}
                 <div

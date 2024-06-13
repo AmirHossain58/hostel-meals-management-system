@@ -29,7 +29,7 @@ const MealsDetails = () => {
   const { id } = useParams();
   const axiosCommon = useAxiosCommon();
   const axiosSecure = useAxiosSecure();
-  const  [membership,badge]= UsePackageMembership();
+  const [membership, badge] = UsePackageMembership();
   const {
     data: meal = {},
     isLoading,
@@ -41,6 +41,12 @@ const MealsDetails = () => {
       return res.data;
     },
   });
+  useEffect(() => {
+    const isLike = meal?.likesInfo?.find(
+      (info) => info?.email === user?.email
+    )?.isLike;
+    setLike(isLike);
+  }, [meal, user?.email]);
   const [likeCount, setLikeCount] = useState();
   useEffect(() => {
     setLikeCount(meal?.like);
@@ -51,6 +57,15 @@ const MealsDetails = () => {
       const res = await axiosSecure.put(`/meals/like/${id}`, updateData);
       return res.data;
     },
+    onSuccess: async () => {
+      const res = await axiosSecure.put(`/meals/likerInfo/${id}`, {
+        liker: user?.displayName,
+        image: user?.photoURL,
+        email: user?.email,
+        isLike: like,
+      });
+      return res.data;
+    },
   });
   const { mutateAsync: mutateAsyncReview } = useMutation({
     mutationKey: [],
@@ -58,10 +73,12 @@ const MealsDetails = () => {
       const res = await axiosSecure.put(`/meals/review/${id}`, updateData);
       return res.data;
     },
-    onSuccess:async()=>{
-      const res = await axiosSecure.put(`/meals/update/${id}`,{reviewCount:(parseInt(meal.reviewCount)+1)});
+    onSuccess: async () => {
+      const res = await axiosSecure.put(`/meals/update/${id}`, {
+        reviewCount: parseInt(meal.reviewCount) + 1,
+      });
       return res.data;
-    }
+    },
   });
   const handleLike = async () => {
     if (user && user.email) {
@@ -98,9 +115,10 @@ const MealsDetails = () => {
       email: user?.email,
       rating: rating,
       comment: reviewComment,
-      reviewId:user?.email.split('@',)[0]+(parseInt(meal?.reviews?.length)+1)
+      reviewId:
+        user?.email.split("@")[0] + (parseInt(meal?.reviews?.length) + 1),
     };
-    console.log(review);
+    review;
     await mutateAsyncReview(review);
     refetch();
     setIsOpen(false);
@@ -130,9 +148,9 @@ const MealsDetails = () => {
   };
   const handleRequestButton = () => {
     if (user && user.email) {
-      if(membership&&(badge==='Silver'||'Gold'||'Platinum')){
+      if (membership && (badge === "Silver" || "Gold" || "Platinum")) {
         setIsOpenReq(true);
-      }else {
+      } else {
         Swal.fire({
           title: "You are not Subscribed any Package",
           text: "Please subscribed a package to Request Meals?",
@@ -165,35 +183,32 @@ const MealsDetails = () => {
       });
     }
   };
-  const handleMealRequest=async(mealInfo)=>{
-    const requestMealInfo={
+  const handleMealRequest = async (mealInfo) => {
+    const requestMealInfo = {
       ...mealInfo,
-      mealId:mealInfo?._id,
-      status:"pending",
-      requesterEmail:user?.email,
-      requesterName:user?.displayName
-    }
-  delete requestMealInfo?._id
-    console.log(requestMealInfo);
-    try{
+      mealId: mealInfo?._id,
+      status: "pending",
+      requesterEmail: user?.email,
+      requesterName: user?.displayName,
+    };
+    delete requestMealInfo?._id(requestMealInfo);
+    try {
       const res = await axiosSecure.post(`/Meal-request`, requestMealInfo);
-      if(res.data.acknowledged){
+      if (res.data.acknowledged) {
         Swal.fire({
           position: "top",
           icon: "success",
           title: "Your Meal Request is Success",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
-        setIsOpenReq(false)
+        setIsOpenReq(false);
       }
-      console.log(res.data);
+      res.data;
+    } catch (err) {
+      err;
     }
-    catch(err){
-      console.log(err);
-    }
-
-  }
+  };
   if (isLoading || loading) return <LoadingSpinner />;
 
   return (
@@ -261,9 +276,10 @@ const MealsDetails = () => {
               "
                 >
                   Ingredients:{" "}
-                  {meal?.ingredients.length>0&&meal?.ingredients?.map((data, i) => (
-                    <div key={i}>{data} </div>
-                  ))}
+                  {meal?.ingredients.length > 0 &&
+                    meal?.ingredients?.map((data, i) => (
+                      <div key={i}>{data} </div>
+                    ))}
                 </div>
               </div>
 
@@ -309,7 +325,7 @@ const MealsDetails = () => {
             <div className="md:col-span-3 order-first md:order-last mb-10">
               {/* MealsRequest */}
               <MealsRequest
-              handleMealRequest={handleMealRequest}
+                handleMealRequest={handleMealRequest}
                 isOpen={isOpenReq}
                 closeModal={closeModal}
                 handleRequestButton={handleRequestButton}

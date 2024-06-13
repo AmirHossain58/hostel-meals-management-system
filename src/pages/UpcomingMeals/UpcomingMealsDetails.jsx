@@ -29,7 +29,7 @@ const UpcomingMealsDetails = () => {
   const { id } = useParams();
   const axiosCommon = useAxiosCommon();
   const axiosSecure = useAxiosSecure();
-  const  [membership,badge]= UsePackageMembership();
+  const [membership, badge] = UsePackageMembership();
   const {
     data: meal = {},
     isLoading,
@@ -40,13 +40,14 @@ const UpcomingMealsDetails = () => {
       const res = await axiosCommon(`/upcoming-meals/${id}`);
       return res.data;
     },
-
   });
-  useEffect(()=>{
-    const isLike=meal?.likesInfo?.find(info=>info?.email===user?.email)?.isLike
-    setLike(isLike)
-  },[meal,user?.email])
-//   console.log(meal);
+  useEffect(() => {
+    const isLike = meal?.likesInfo?.find(
+      (info) => info?.email === user?.email
+    )?.isLike;
+    setLike(isLike);
+  }, [meal, user?.email]);
+  //    (meal);
   const [likeCount, setLikeCount] = useState();
   useEffect(() => {
     setLikeCount(meal?.like);
@@ -54,40 +55,49 @@ const UpcomingMealsDetails = () => {
   const { mutateAsync } = useMutation({
     mutationKey: [],
     mutationFn: async (updateData) => {
-      const res = await axiosSecure.put(`/upcoming-meals/like/${id}`, updateData);
+      const res = await axiosSecure.put(
+        `/upcoming-meals/like/${id}`,
+        updateData
+      );
       return res.data;
     },
-    onSuccess:async()=>{
-        const res = await axiosSecure.put(`/upcoming-meals/likerInfo/${id}`, { liker: user?.displayName,
-            image: user?.photoURL,
-            email: user?.email,
-            isLike:like
-        });
+    onSuccess: async () => {
+      const res = await axiosSecure.put(`/upcoming-meals/likerInfo/${id}`, {
+        liker: user?.displayName,
+        image: user?.photoURL,
+        email: user?.email,
+        isLike: like,
+      });
       return res.data;
-    }
+    },
   });
   const { mutateAsync: mutateAsyncReview } = useMutation({
     mutationKey: [],
     mutationFn: async (updateData) => {
-      const res = await axiosSecure.put(`/upcoming-meals/review/${id}`, updateData);
+      const res = await axiosSecure.put(
+        `/upcoming-meals/review/${id}`,
+        updateData
+      );
       return res.data;
     },
-    onSuccess:async()=>{
-      const res = await axiosSecure.put(`/upcoming-meals/update/${id}`,{reviewCount:(parseInt(meal.reviewCount)+1)});
+    onSuccess: async () => {
+      const res = await axiosSecure.put(`/upcoming-meals/update/${id}`, {
+        reviewCount: parseInt(meal.reviewCount) + 1,
+      });
       return res.data;
-    }
+    },
   });
   const handleLike = async () => {
     if (user && user.email) {
-        if(membership&&(badge==='Silver'||'Gold'||'Platinum')){
-          setLike(!like);
-          setLikeCount(!like ? likeCount + 1 : likeCount - 1);
-          const data = {
-            like: !like ? likeCount + 1 : likeCount - 1,
-          };
-          await mutateAsync(data);
-          refetch();
-      }else {
+      if (membership && (badge === "Silver" || "Gold" || "Platinum")) {
+        setLike(!like);
+        setLikeCount(!like ? likeCount + 1 : likeCount - 1);
+        const data = {
+          like: !like ? likeCount + 1 : likeCount - 1,
+        };
+        await mutateAsync(data);
+        refetch();
+      } else {
         Swal.fire({
           title: "You are not Subscribed any Package",
           text: "Please subscribed a package to Request Meals?",
@@ -129,19 +139,19 @@ const UpcomingMealsDetails = () => {
       email: user?.email,
       rating: rating,
       comment: reviewComment,
-      reviewId:user?.email.split('@',)[0]+(parseInt(meal?.reviews?.length)+1)
+      reviewId:
+        user?.email.split("@")[0] + (parseInt(meal?.reviews?.length) + 1),
     };
-    console.log(review);
+    review;
     await mutateAsyncReview(review);
     refetch();
     setIsOpen(false);
   };
   const handleReviewButton = () => {
     if (user && user.email) {
-        if(membership&&(badge==='Silver'||'Gold'||'Platinum')){
-          setIsOpen(true);
-       
-      }else {
+      if (membership && (badge === "Silver" || "Gold" || "Platinum")) {
+        setIsOpen(true);
+      } else {
         Swal.fire({
           title: "You are not Subscribed any Package",
           text: "Please subscribed a package to Request Meals?",
@@ -157,7 +167,6 @@ const UpcomingMealsDetails = () => {
           }
         });
       }
-      
     } else {
       Swal.fire({
         title: "You are not Logged In",
@@ -175,9 +184,7 @@ const UpcomingMealsDetails = () => {
       });
     }
   };
- 
- 
- 
+
   if (isLoading || loading) return <LoadingSpinner />;
 
   return (
@@ -245,9 +252,10 @@ const UpcomingMealsDetails = () => {
               "
                 >
                   Ingredients:{" "}
-                  {meal?.ingredients.length>0&&meal?.ingredients?.map((data, i) => (
-                    <div key={i}>{data} </div>
-                  ))}
+                  {meal?.ingredients.length > 0 &&
+                    meal?.ingredients?.map((data, i) => (
+                      <div key={i}>{data} </div>
+                    ))}
                 </div>
               </div>
 
@@ -289,7 +297,6 @@ const UpcomingMealsDetails = () => {
               </div>
               <Testimonials reviews={meal?.reviews}></Testimonials>
             </div>
-
           </div>
         </div>
       )}

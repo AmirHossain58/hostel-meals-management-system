@@ -19,6 +19,7 @@ const Sidebar = () => {
   const [isActive, setActive] = useState(false);
   const [toggle, setToggle] = useState(true);
   const [role, isLoading] = useBadge();
+  console.log(role);
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive);
@@ -32,11 +33,11 @@ const Sidebar = () => {
       {/* Small Screen Navbar */}
       <div className="bg-gray-100 text-gray-800 flex justify-between md:hidden">
         <div>
-          <div className="block cursor-pointer p-4 font-bold">
             <Link to="/">
+          <div className="block cursor-pointer p-4 font-bold">
             Hostel Meals
-            </Link>
           </div>
+            </Link>
         </div>
 
         <button
@@ -55,7 +56,7 @@ const Sidebar = () => {
       >
         <div>
           <div>
-            <div className="w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-rose-100 mx-auto font-bold">
+            <div className="w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-[#e46f6c] text-white mx-auto font-bold">
               <Link to="/">
                 Hostel Meals
               </Link>

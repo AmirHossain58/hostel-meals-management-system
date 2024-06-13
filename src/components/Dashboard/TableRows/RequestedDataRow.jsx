@@ -1,82 +1,86 @@
-import { format } from 'date-fns'
-import PropTypes from 'prop-types'
-import { useState } from 'react'
-import DeleteModal from '../../Modal/DeleteModal'
-import useAxiosSecure from '../../../hooks/useAxiosSecure'
-import { useMutation } from '@tanstack/react-query'
-import toast from 'react-hot-toast'
+import { format } from "date-fns";
+import PropTypes from "prop-types";
+import { useState } from "react";
+import DeleteModal from "../../Modal/DeleteModal";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
-const RequestedDataRow = ({requestedMeal, refetch }) => {
-  const axiosSecure = useAxiosSecure()
-  const [isOpen, setIsOpen] = useState(false)
+const RequestedDataRow = ({ requestedMeal, refetch }) => {
+  const axiosSecure = useAxiosSecure();
+  const [isOpen, setIsOpen] = useState(false);
   const closeModal = () => {
-    setIsOpen(false)
-  }
+    setIsOpen(false);
+  };
 
   //   delete
   const { mutateAsync } = useMutation({
-    mutationFn: async id => {
-      const { data } = await axiosSecure.delete(`/requested-meals/${id}`)
-      return data
+    mutationFn: async (id) => {
+      const { data } = await axiosSecure.delete(`/requested-meals/${id}`);
+      return data;
     },
-    onSuccess: async data => {
-      refetch()
-      toast.success('Meal Request Canceled')
-      //   Change Room booked status back to false
-      // await axiosSecure.patch(`/room/status/${requestedMeal?.roomId}`, {
-      //   status: false,
-      // })
+    onSuccess: async (data) => {
+      refetch();
+      toast.success("Meal Request Canceled");
     },
-  })
+  });
 
   //  Handle Delete
-  const handleDelete = async id => {
+  const handleDelete = async (id) => {
     try {
-      await mutateAsync(id)
+      await mutateAsync(id);
     } catch (err) {
-      console.log(err)
+      err;
     }
-  }
+  };
 
   return (
     <tr>
-      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <div className='flex items-center'>
-          <div className='flex-shrink-0'>
-            <div className='block relative'>
+      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        <div className="flex items-center">
+          <div className="flex-shrink-0">
+            <div className="block relative">
               <img
-                alt='profile'
+                alt="profile"
                 src={requestedMeal?.image}
-                className='mx-auto object-cover rounded h-10 w-15 '
+                className="mx-auto object-cover rounded h-10 w-15 "
               />
             </div>
           </div>
-          <div className='ml-3'>
-            <p className='text-gray-900 whitespace-no-wrap'>{requestedMeal?.title}</p>
+          <div className="ml-3">
+            <p className="text-gray-900 whitespace-no-wrap">
+              {requestedMeal?.title}
+            </p>
           </div>
         </div>
       </td>
-      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        {  <p className='text-gray-900 whitespace-no-wrap'>{requestedMeal?.like}</p>}
+      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        {
+          <p className="text-gray-900 whitespace-no-wrap">
+            {requestedMeal?.like}
+          </p>
+        }
       </td>
-      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 whitespace-no-wrap'>{requestedMeal?.reviews?.length}</p>
+      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        <p className="text-gray-900 whitespace-no-wrap">
+          {requestedMeal?.reviews?.length}
+        </p>
       </td>
-      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 whitespace-no-wrap'>
+      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        <p className="text-gray-900 whitespace-no-wrap">
           {requestedMeal?.status}
         </p>
       </td>
-      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <button
           onClick={() => setIsOpen(true)}
-          className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'
+          className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
         >
           <span
-            aria-hidden='true'
-            className='absolute inset-0 bg-red-200 opacity-50 rounded-full'
+            aria-hidden="true"
+            className="absolute inset-0 bg-red-200 opacity-50 rounded-full"
           ></span>
-          <span className='relative'>Cancel</span>
+          <span className="relative">Cancel</span>
         </button>
         {/* Delete Modal */}
         <DeleteModal
@@ -87,12 +91,12 @@ const RequestedDataRow = ({requestedMeal, refetch }) => {
         />
       </td>
     </tr>
-  )
-}
+  );
+};
 
 RequestedDataRow.propTypes = {
   requestedMeal: PropTypes.object,
   refetch: PropTypes.func,
-}
+};
 
-export default RequestedDataRow
+export default RequestedDataRow;

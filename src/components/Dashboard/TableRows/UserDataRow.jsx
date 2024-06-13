@@ -7,7 +7,6 @@ import toast from 'react-hot-toast'
 import useAuth from '../../../hooks/useAuth'
 import UpdateUserRoleModal from '../../Modal/UpdateUserRoleModal'
 const UserDataRow = ({ user, refetch }) => {
-  console.log(user);
   const { user: loggedInUser } = useAuth()
 
   const [isOpen, setIsOpen] = useState(false)
@@ -22,7 +21,6 @@ const UserDataRow = ({ user, refetch }) => {
     },
     onSuccess: data => {
       refetch()
-      console.log(data)
       toast.success('User role updated successfully!')
       setIsOpen(false)
     },
@@ -43,7 +41,7 @@ const UserDataRow = ({ user, refetch }) => {
     try {
       await mutateAsync(userRole)
     } catch (err) {
-      console.log(err)
+       (err)
       toast.error(err.message)
     }
   }
