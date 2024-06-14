@@ -21,15 +21,16 @@ navigate(url)
   items-center 
   justify-center 
   gap-2
-  p-3
+  p-2
+  md:p-5
   border-b-2
-  hover:text-neutral-800
+  hover:text-neutral-800 hover:border-2 hover:border-[#e46f6c]
   transition
   cursor-pointer
-  ${category===label&&' border-slate-900 text-neutral-600'}`}
+  ${category===label&&' border-2 border-[#e46f6c] text-neutral-600'}`}
     >
       <Icon size={26} />
-      <div className='text-sm font-medium'>{label}</div>
+      <div className='text-sm font-medium flex-grow'>{label}</div>
     </div>
   )
 }

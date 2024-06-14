@@ -27,7 +27,7 @@ const Slide = ({ image, text,title }) => {
           <form 
           onSubmit={handleSearch}
           >
-            <div className='flex p-1 overflow-hidden border rounded-lg    focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300'>
+            <div className='flex p-1 overflow-hidden border border-[#f3a29f] rounded-lg    focus-within:ring focus-within:ring-opacity-40 focus-within:border-[#e46f6c] focus-within:ring-[#df8480]'>
               <input
                 className='px-6 py-2 text-gray-700 placeholder-gray-500 bg-white outline-none focus:placeholder-transparent'
                 type='text'

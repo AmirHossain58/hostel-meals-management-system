@@ -34,11 +34,11 @@ const Profile = () => {
   //   Form handler
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const form = e.target(image);
+    const form = e.target;
 
     try {
       if (imageFile) {
-        const image_url = await imageUpload(imageFile)(image_url);
+        const image_url = await imageUpload(imageFile)
         await updateUserProfile(name, image_url);
       } else {
         await updateUserProfile(name, image);
@@ -46,7 +46,6 @@ const Profile = () => {
       name, image;
       setIsOpen(false);
     } catch (err) {
-      err;
       toast.error(err.message);
     }
   };
@@ -96,9 +95,11 @@ const Profile = () => {
           </p>
 
           <div className="w-full p-2 mt-4 rounded-lg">
-            <p className=" uppercase  font-bold">
+            {role.role==='admin'?<p className=" uppercase  font-bold">
               Meals Added : {data?.length}
-            </p>
+            </p>:<p className=" font-bold">
+             Badge : {role.badge.slice(0, 1).toUpperCase() +role.badge.slice(1) }
+            </p>}
             <div className="flex flex-wrap items-center justify-between text-sm text-gray-600 ">
               <p className="flex flex-col">
                 Name

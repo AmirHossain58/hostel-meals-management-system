@@ -191,7 +191,7 @@ const MealsDetails = () => {
       requesterEmail: user?.email,
       requesterName: user?.displayName,
     };
-    delete requestMealInfo?._id(requestMealInfo);
+    delete requestMealInfo?._id
     try {
       const res = await axiosSecure.post(`/Meal-request`, requestMealInfo);
       if (res.data.acknowledged) {
@@ -214,14 +214,15 @@ const MealsDetails = () => {
   return (
     <Container>
       <Helmet>
-        <title>{meal?.title}</title>
+        <title>Meal Detail || {meal?.title}</title>
       </Helmet>
       {meal && (
         <div className="max-w-screen-xl mx-auto">
           {/* Header */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 mt-4">
             <div>
-              <Heading title={`Category: ${meal?.category}: ${meal?.title}`} />
+              <Heading title={`Meal Name: ${meal?.title}`} />
+              <Heading title={`Category: ${meal?.category}`} />
               <div className="w-full  overflow-hidden md:h-[60vh] rounded-xl">
                 <img
                   className="object-cover md:h-[60vh] w-full"
@@ -257,9 +258,7 @@ const MealsDetails = () => {
                 </div>
                 <div className="flex justify-between items-center antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
                   <h4 className="">
-                    Post Since:
-                    {meal?.postTime &&
-                      formatDistanceToNow(new Date(meal?.postTime))}
+                    Post Time : {new Date(meal?.postTime).toLocaleString()}
                   </h4>
                   <div className="font-semibold">⭐ {meal?.rating}</div>
                 </div>
@@ -276,7 +275,7 @@ const MealsDetails = () => {
               "
                 >
                   Ingredients:{" "}
-                  {meal?.ingredients.length > 0 &&
+                  {meal?.ingredients?.length > 0 &&
                     meal?.ingredients?.map((data, i) => (
                       <div key={i}>{data} </div>
                     ))}
@@ -288,7 +287,7 @@ const MealsDetails = () => {
                 className="
           text-lg font-light text-neutral-500"
               >
-                {meal?.description}
+                Description : {meal?.description}
               </div>
               <hr />
               <div className="flex  gap-2 md:gap-5">

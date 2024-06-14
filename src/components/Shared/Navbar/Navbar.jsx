@@ -42,7 +42,12 @@ const Navbar = () => {
         <Container>
           <div className="flex flex-row  items-center justify-between gap-3 md:gap-0">
             {/* Logo */}
-            <Link to="/" className="bg-[#e46f6c] text-white p-2 md:p-3 md:text-lg md:font-bold rounded">Hostel Meals Management</Link>
+            <Link to="/" className="bg-[#e46f6c]  p-2 md:p-3   rounded">
+          <div className="flex justify-center items-center gap-">
+          <img src="/mealLogo.jpg" className="rounded w-10 hidden md:block " alt="" />
+          <h1 className=" text-white md:text-lg font-semibold md:font-bold"> Hostel Meals Management</h1>
+          </div>
+            </Link>
             {/* Dropdown Menu */}
             <div className="relative">
               <div className="flex flex-row items-center gap-3">

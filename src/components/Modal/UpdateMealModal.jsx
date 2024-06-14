@@ -36,12 +36,12 @@ const UpdateMealModal = ({ setIsEditModalOpen, isOpen, meal, refetch }) => {
     setLoading(true);
     e.preventDefault();
     const updatedMealData = Object.assign({}, mealData);
-    delete updatedMealData._id(updatedMealData);
+    delete updatedMealData._id
     try {
       const { data } = await axiosSecure.put(
         `/meals/update/${meal?._id}`,
         updatedMealData
-      )(data);
+      )
       refetch();
       setIsEditModalOpen(false);
       setLoading(false);

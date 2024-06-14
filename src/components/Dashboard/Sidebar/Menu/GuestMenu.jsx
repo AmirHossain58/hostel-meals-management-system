@@ -16,7 +16,10 @@ const GuestMenu = () => {
 
   return (
     <>
-      <MenuItem icon={CgProfile} label="My Profile" address="my-profile" />
+      <MenuItem 
+      icon={CgProfile} 
+      label="My Profile" 
+      address="/dashboard" />
       <MenuItem
         icon={GiHotMeal}
         label="Requested Meals"

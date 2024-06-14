@@ -6,17 +6,18 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import PropTypes from "prop-types";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 const CheckoutForm = ({ closeModal, bookingInfo, refetch }) => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useAuth();
   const [clientSecret, setClientSecret] = useState();
   const [cardError, setCardError] = useState("");
   const [processing, setProcessing] = useState(false);
-
+  const from = location?.state || "/meals";
   useEffect(() => {
     // fetch client secret
     if (bookingInfo?.price && bookingInfo?.price > 1) {
@@ -106,7 +107,7 @@ const CheckoutForm = ({ closeModal, bookingInfo, refetch }) => {
 
         closeModal();
         toast.success(`Package ${bookingInfo?.title} Buy Successfully`);
-        navigate("/meals");
+        navigate(from);
       } catch (err) {
         err;
       }

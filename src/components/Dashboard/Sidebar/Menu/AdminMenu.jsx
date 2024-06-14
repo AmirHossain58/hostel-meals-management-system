@@ -12,7 +12,7 @@ const AdminMenu = () => {
       <MenuItem 
       icon={RiAdminLine} 
       label="Admin Profile" 
-      address="my-profile" 
+      address="/dashboard" 
       />
       <MenuItem 
       icon={MdManageAccounts} 

@@ -36,7 +36,7 @@ const ManageUsers = () => {
     };
     getCount();
   }, [search, axiosSecure]);
-  const numberOfPages = Math.ceil(count / itemsPerPage)(numberOfPages);
+  const numberOfPages = Math.ceil(count / itemsPerPage);
   const pages = [...Array(numberOfPages).keys()].map((element) => element + 1);
 
   //  handle pagination button
@@ -48,20 +48,19 @@ const ManageUsers = () => {
     e.preventDefault();
 
     setSearch(searchText);
-  };
-
-  users;
+  }
+  
   if (isLoading) return <LoadingSpinner />;
   return (
     <>
       <div className="container mx-auto px-4 sm:px-8">
         <Helmet>
-          <title>Manage Users</title>
+          <title>Dashboard | Manage Users</title>
         </Helmet>
         <div className="py-8 min-h-[calc(100vh-200px)]">
           <div className=" flex justify-center">
             <form onSubmit={handleSearch}>
-              <div className="flex p-1 overflow-hidden border rounded-lg    focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">
+              <div className="flex p-1 overflow-hidden border rounded-lg    focus-within:ring focus-within:ring-opacity-40 focus-within:border-border-2 border-[#dd8c89] focus-within:ring-[#dd8c89]">
                 <input
                   className="px-6 py-2 text-gray-700 placeholder-gray-500 bg-white outline-none focus:placeholder-transparent"
                   type="text"

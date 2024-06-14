@@ -38,7 +38,7 @@ const AllReviewsDataRow = ({ meal, refetch, i }) => {
 
   //  Handle Delete
   const handleDelete = async (meal) => {
-    const mealId = meal?.mealId(mealId);
+    const mealId = meal?.mealId
     try {
       await mutateAsync(mealId);
     } catch (err) {

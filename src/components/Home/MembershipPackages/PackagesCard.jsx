@@ -39,7 +39,7 @@ const PackagesCard = ({ pack }) => {
        <div>
        <button
           rel="noopener noreferrer"
-          className="btn inline-block w-full px-5 py-3 font-bold tracking-wider text-center rounded dark:bg-gray-100 dark:text-violet-600"
+          className="btn inline-block w-full px-5 py-3 font-bold tracking-wider text-center bg-[#e46f6c] text-white rounded dark:bg-gray-100 dark:text-violet-600"
         >
           Get Started
         </button>

@@ -12,7 +12,6 @@ const AllMealsTable = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [count, setCount] = useState(0);
-  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   //   Fetch meals  Data
   const {
@@ -27,7 +26,7 @@ const AllMealsTable = () => {
       );
       return data;
     },
-  })(meals);
+  })
   useEffect(() => {
     const getCount = async () => {
       const { data } = await axiosSecure(
@@ -72,7 +71,7 @@ const AllMealsTable = () => {
   return (
     <>
       <Helmet>
-        <title>My Listings</title>
+        <title>Dashboard | All Meals</title>
       </Helmet>
 
       <div className="container mx-auto px-4 sm:px-8">

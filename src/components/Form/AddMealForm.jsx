@@ -1,6 +1,6 @@
 import { categories } from "../Categories/CategoriesData";
 import { DateRange } from "react-date-range";
-import { TbFidgetSpinner } from "react-icons/tb";
+import { ImSpinner9 } from "react-icons/im";
 const AddMealForm = ({
   dates,
   handleDates,
@@ -92,7 +92,7 @@ const AddMealForm = ({
                       accept="image/*"
                       hidden
                     />
-                    <div className="bg-[#e46f6c] text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-rose-500">
+                    <div className="bg-[#e46f6c] text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-[#dd8c89]">
                       {/* {imageText} */}
                       {imageText.length > 20
                         ? imageText.split(".")[0].slice(0, 15) +
@@ -152,7 +152,7 @@ const AddMealForm = ({
           className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-[#e46f6c]"
         >
           {loading ? (
-            <TbFidgetSpinner className="animate-spin m-auto" />
+            <ImSpinner9 className="animate-spin m-auto" />
           ) : (
             " Save & Continue"
           )}

@@ -37,7 +37,7 @@ const AllReviews = () => {
     };
     getCount();
   }, [axiosSecure]);
-  const numberOfPages = Math.ceil(count / itemsPerPage)(numberOfPages);
+  const numberOfPages = Math.ceil(count / itemsPerPage)
   const pages = [...Array(numberOfPages).keys()]?.map((element) => element + 1);
 
   //  handle pagination button
@@ -49,7 +49,7 @@ const AllReviews = () => {
   return (
     <>
       <Helmet>
-        <title>My Listings</title>
+        <title>Dashboard | All Reviews</title>
       </Helmet>
 
       <div className="container mx-auto px-4 sm:px-8">

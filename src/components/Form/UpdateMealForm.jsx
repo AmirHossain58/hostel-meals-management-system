@@ -80,7 +80,7 @@ const UpdateMealForm = ({
                       accept="image/*"
                       hidden
                     />
-                    <div className="bg-rose-500 text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-rose-500">
+                    <div className="bg-[#dd8c89] text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-[#dd8c89]">
                       Upload Image
                     </div>
                   </label>
@@ -126,7 +126,7 @@ const UpdateMealForm = ({
 
         <button
           type="submit"
-          className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-rose-500"
+          className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-[#dd8c89]"
         >
           Update
         </button>

@@ -7,9 +7,15 @@ import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { ImSpinner10 } from "react-icons/im";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { Helmet } from "react-helmet-async";
+
 const SignUp = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [show,setShow]=useState(false)
+
   const from = location?.state || "/";
   const {
     createUser,
@@ -28,7 +34,7 @@ const SignUp = () => {
     const name = data.name;
     const email = data.email;
     const password = data.password;
-    const image = data.image[0](name, email, password, image);
+    const image = data.image[0]
 
     const formData = new FormData();
     formData.append("image", image);
@@ -67,6 +73,9 @@ const SignUp = () => {
   };
   return (
     <div className="flex justify-center items-center min-h-screen">
+      <Helmet>
+          <title>Hostel Meals Management | Sign Up</title>
+        </Helmet>
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold">Sign Up</h1>
@@ -88,7 +97,7 @@ const SignUp = () => {
                 name="name"
                 id="name"
                 placeholder="Enter Your Name Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-[#e46f6c] bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
                 {...register("name", { required: true })}
               />
@@ -124,7 +133,7 @@ const SignUp = () => {
                 id="email"
                 required
                 placeholder="Enter Your Email Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-[#e46f6c] bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
                 {...register("email", { required: true })}
               />
@@ -133,33 +142,36 @@ const SignUp = () => {
                 <span className="text-red-700">This field is required</span>
               )}
             </div>
-            <div>
+            <div className="relative">
               <div className="flex justify-between">
                 <label htmlFor="password" className="text-sm mb-2">
                   Password
                 </label>
               </div>
               <input
-                type="password"
+                type={show?'text':'password'}
                 name="password"
                 autoComplete="new-password"
                 id="password"
                 required
                 placeholder="*******"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-[#e46f6c] bg-gray-200 text-gray-900"
                 {...register("password", { required: true })}
               />
               {/* errors will return when field validation fails  */}
               {errors.password && (
                 <span className="text-red-700">This field is required</span>
               )}
+              <div onClick={()=>{setShow(!show)}} className='absolute text-3xl right-4 top-[48%] hover:cursor-pointer'>
+                 {show?<FaEye />:<FaEyeSlash />}
+                 </div>
             </div>
           </div>
 
           <div>
             <button
               type="submit"
-              className="bg-rose-500 w-full rounded-md py-3 text-white"
+              className="bg-[#e46f6c] w-full rounded-md py-3 text-white"
             >
               {loading ? (
                 <ImSpinner10 className="animate-spin mx-auto text-xl" />
@@ -188,7 +200,7 @@ const SignUp = () => {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="hover:underline hover:text-rose-500 text-gray-600"
+            className="hover:underline hover:text-[#e46f6c] text-gray-600"
           >
             Login
           </Link>

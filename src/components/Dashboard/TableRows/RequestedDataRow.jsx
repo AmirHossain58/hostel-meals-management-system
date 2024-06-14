@@ -26,9 +26,10 @@ const RequestedDataRow = ({ requestedMeal, refetch }) => {
   });
 
   //  Handle Delete
-  const handleDelete = async (id) => {
+  const handleDelete = async (meal) => {
+    console.log(meal);
     try {
-      await mutateAsync(id);
+      await mutateAsync(meal._id);
     } catch (err) {
       err;
     }
@@ -87,7 +88,7 @@ const RequestedDataRow = ({ requestedMeal, refetch }) => {
           handleDelete={handleDelete}
           closeModal={closeModal}
           isOpen={isOpen}
-          id={requestedMeal?._id}
+          meal={requestedMeal}
         />
       </td>
     </tr>

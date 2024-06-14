@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLoaderData, useParams } from 'react-router-dom';
 import MealRequestModal from '../../components/Modal/MealRequestModal';
 import CheckoutModal from '../../components/Modal/CheckoutModal';
+import { Helmet } from 'react-helmet-async';
 
 const Checkout = () => {
     const[isOpen,setIsOpen]=useState(false)
@@ -13,6 +14,9 @@ const Checkout = () => {
     }
     return (
         <div className=''>
+           <Helmet>
+          <title>Hostel Meals Management | Checkout</title>
+        </Helmet>
            <div className="flex justify-center w-full container mx-auto">
       <div className="flex w-2/3 flex-col p-6 space-y-6 rounded shadow sm:p-8 dark:bg-violet-600 dark:text-gray-50">
         <div className="space-y-2">

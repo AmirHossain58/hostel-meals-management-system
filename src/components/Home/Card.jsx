@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import Button from '../Shared/Button/Button'
 
 const Card = ({ meals,address }) => {
   return (
@@ -34,12 +35,13 @@ const Card = ({ meals,address }) => {
           ></div>
         </div>
         <div className='font-semibold mb-2 text-lg'>{meals?.title}</div>
-        <div className='flex flex-row items-center justify-between gap-1'>
+        <div className='flex flex-row items-center justify-between gap-1 mb-2'>
           <div className='font-semibold'>$ {meals?.price}</div>
           <div className='font-light'></div>
           <div className='font-semibold'>⭐ {meals?.rating}</div>
           <div className='font-light'></div>
         </div>
+        <Button label={'Details'}></Button>
       </div>
     </Link>
   )

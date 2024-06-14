@@ -19,14 +19,9 @@ const Sidebar = () => {
   const [isActive, setActive] = useState(false);
   const [toggle, setToggle] = useState(true);
   const [role, isLoading] = useBadge();
-  console.log(role);
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive);
-  };
-
-  const toggleHandler = (event) => {
-    setToggle(event.target.checked);
   };
   return (
     <>

@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div>
       <Helmet>
-        <title>StayVista | Vacation Homes & Condo Rentals</title>
+        <title>Hostel Meals Management | Student Meals | Food Reviews</title>
       </Helmet>
       <Carousel></Carousel>
         {/* Categories section  */}

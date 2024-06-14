@@ -78,7 +78,6 @@ const AddMeal = () => {
         admin: admin,
         likesInfo: [],
       };
-      console.table(mealData);
       //   Post request to server
       await mutateAsync(mealData);
       setLoading(false);
@@ -99,7 +98,7 @@ const AddMeal = () => {
   return (
     <>
       <Helmet>
-        <title>Add Meal | Dashboard</title>
+        <title> Dashboard | Add Meal</title>
       </Helmet>
 
       <div className="md:mt-16">

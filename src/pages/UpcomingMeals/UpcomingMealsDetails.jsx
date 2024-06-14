@@ -190,14 +190,15 @@ const UpcomingMealsDetails = () => {
   return (
     <Container>
       <Helmet>
-        <title>{meal?.title}</title>
+        <title>Meals Details || {meal?.title}</title>
       </Helmet>
       {meal && (
-        <div className="max-w-screen-xl mx-auto">
+        <div className="max-w-screen-xl mx-auto mb-6">
           {/* Header */}
           <div className="flex flex-col gap-6">
-            <div>
-              <Heading title={`Category: ${meal?.category}: ${meal?.title}`} />
+            <div className="mt-4 ">
+              <Heading title={`Meals Name : ${meal?.title}`} />
+              <Heading title={`Category: ${meal?.category}`} />
               <div className="w-full  overflow-hidden md:h-[60vh] rounded-xl">
                 <img
                   className="object-cover md:h-[60vh] w-full"
@@ -232,10 +233,8 @@ const UpcomingMealsDetails = () => {
                   />
                 </div>
                 <div className="flex justify-between items-center antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                  <h4 className="">
-                    Post Since:
-                    {meal?.postTime &&
-                      formatDistanceToNow(new Date(meal?.postTime))}
+                <h4 className="">
+                    Post Time : {new Date(meal?.postTime).toLocaleString()}
                   </h4>
                   <div className="font-semibold">⭐ {meal?.rating}</div>
                 </div>
@@ -264,7 +263,7 @@ const UpcomingMealsDetails = () => {
                 className="
           text-lg font-light text-neutral-500"
               >
-                {meal?.description}
+                 Description : {meal?.description}
               </div>
               <hr />
               <div className="flex  gap-2 md:gap-5">

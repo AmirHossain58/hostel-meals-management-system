@@ -40,7 +40,7 @@ const UpcomingMealsTable = () => {
     };
     getCount();
   }, [axiosSecure, sortLikes]);
-  const numberOfPages = Math.ceil(count / itemsPerPage)(numberOfPages);
+  const numberOfPages = Math.ceil(count / itemsPerPage)
   const pages = [...Array(numberOfPages).keys()].map((element) => element + 1);
 
   //  handle pagination button
@@ -48,9 +48,7 @@ const UpcomingMealsTable = () => {
     value;
     setCurrentPage(value);
   };
-  const publishWithLike = meals?.find((meal) => meal?.like >= 10)(
-    publishWithLike
-  );
+  const publishWithLike = meals?.find((meal) => meal?.like >= 10)
   //   delete
   const { mutateAsync } = useMutation({
     mutationFn: async (mealData) => {
@@ -71,9 +69,10 @@ const UpcomingMealsTable = () => {
     const mealData = {
       ...meal,
     };
-    delete mealData?._id(mealData);
+    delete mealData?._id
     try {
-      const res = await mutateAsync(mealData)(res);
+      const res = await mutateAsync(mealData)
+      console.log(res?.insertedId);
       if (res?.insertedId) {
         const res = await axiosSecure.delete(`/upcoming-meals/${id}`);
         if (res?.data?.deletedCount > 1) {
@@ -94,7 +93,7 @@ const UpcomingMealsTable = () => {
   return (
     <>
       <Helmet>
-        <title>My Listings</title>
+        <title>Dashboard | Upcoming Meals</title>
       </Helmet>
 
       <div className="container mx-auto px-4 sm:px-8">
@@ -118,7 +117,7 @@ const UpcomingMealsTable = () => {
             <div>
               <button
                 onClick={() => setIsOpen(true)}
-                className="btn text-lg font-normal bg-red-50"
+                className="btn text-lg font-normal border-2 border-[#dd8c89] focus-within:border-[#e46f6c] focus-within:ring-[#e46f6c] bg-red-50"
               >
                 Add Upcoming Meal
               </button>
