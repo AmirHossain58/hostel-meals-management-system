@@ -9,8 +9,8 @@ Welcome to the Hostel Meals Management System, a comprehensive platform designed
 
 ## Live Site URL
 [Visit the live site here](https://hostelmealsmanagement.web.app/)
-## server side code
-[Visit the live site here](https://hostelmealsmanagement.web.app/)
+## Server side code
+[Visit  here]([https://hostelmealsmanagement.web.app/](https://github.com/AmirHossain58/hostel-meal-management-system-server/tree/main))
 
 ## Features of the Website
 
