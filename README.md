@@ -14,19 +14,17 @@ Welcome to the Hostel Meals Management System, a comprehensive platform designed
 
 ## Features of the Website
 
-1. **Student Login**: Secure login for students using email and password, with options for social logins via Google and Facebook.
-2. **Meal Management**: Admins can add, update, or delete meals with detailed information, including images, descriptions, ingredients, and nutritional facts.
-3. **Review System**: Students can review meals, providing ratings and comments to help others make informed choices.
-4. **Search Functionality**: Advanced search based on all meal data, allowing users to find specific meals quickly.
-5. **Meal Plans and Dietary Preferences**: Predefined meal plans tailored to different dietary needs such as vegetarian, vegan, gluten-free, and low-carb options.
-6. **Nutritional Information**: Detailed nutritional breakdown for each meal, helping users make healthier dietary choices.
-7. **Upcoming Meals**: Display of upcoming meals with a like feature for premium users, encouraging engagement and feedback.
-8. **User Dashboard**: Personalized dashboard for users to view their profile, requested meals, reviews, and payment history.
-9. **Admin Dashboard**: Comprehensive admin panel for managing users, meals, reviews, and meal requests.
-10. **Responsive Design**: Fully responsive design ensuring a seamless experience across mobile, tablet, and desktop devices.
-11. **Persistent Login**: Users remain logged in even after page reloads, providing a smoother user experience.
-12. **Notifications**: Custom notifications for all CRUD operations, successful authentication, and other key actions.
-13. **Secure Payments**: Integration with Stripe for secure payment processing for meal plans and premium subscriptions.
+- **Student Login**: Secure login for students using email and password, with options for social logins via Google and Facebook.
+- **Meal Management**: Admins can add, update, or delete meals with detailed information, including images, descriptions, ingredients, and nutritional facts.
+- **Review System**: Students can review meals, providing ratings and comments to help others make informed choices.
+- **Search Functionality**: Advanced search based on all meal data, allowing users to find specific meals quickly.
+- **Upcoming Meals**: Display of upcoming meals with a like feature for premium users, encouraging engagement and feedback.
+- **User Dashboard**: Personalized dashboard for users to view their profile, requested meals, reviews, and payment history.
+- **Admin Dashboard**: Comprehensive admin panel for managing users, meals, reviews, and meal requests.
+- **Responsive Design**: Fully responsive design ensuring a seamless experience across mobile, tablet, and desktop devices.
+- **Persistent Login**: Users remain logged in even after page reloads, providing a smoother user experience.
+- **Notifications**: Custom notifications for all CRUD operations, successful authentication, and other key actions.
+- **Secure Payments**: Integration with Stripe for secure payment processing for meal plans and premium subscriptions.
 
 ## Packages Used
 - **@headlessui/react**: "^2.0.3"
