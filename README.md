@@ -72,29 +72,27 @@ npm install
 ```
 Set Up Environment Variables
 
-Create a .env file in the client directory with:
+##Create a .env file in the client directory with:
 
 //firebase env
-VITE_apiKey=//api key
-VITE_authDomain=// auth dommain
-VITE_appId=// api id
-VITE_projectId=//projectId
-VITE_storageBucket=//storageBucket
-VITE_messagingSenderId=//messagingSenderId
+-VITE_apiKey=//api key
+-VITE_authDomain=// auth dommain
+-VITE_appId=// api id
+-VITE_projectId=//projectId
+-VITE_storageBucket=//storageBucket
+-VITE_messagingSenderId=//messagingSenderId
 
-VITE_API_URL=http://localhost:8000
-VITE_IMAGE_HOSTING_KEY=//IMAGE_HOSTING_KEY
+-VITE_API_URL=http://localhost:8000
+-VITE_IMAGE_HOSTING_KEY=//IMAGE_HOSTING_KEY
 
-VITE_Payment_Gateway_PK=pk_test_51PLMaI0645ifpsFbGpmz2f7c12Zox69muGS5Dy9GoaR9ivsZmVrTj5DXXDCC1SyXUQpt2VdhAlF4xXKckbhMIE9z00wyBvPmpt
+-VITE_Payment_Gateway_PK= //pk_test_Payment_Gateway
 
-Create a .env file in the server directory with:
+##Create a .env file in the server directory with:
 
-
-PORT=5000
-DB_USER= //database user name
-DB_PASS=//password
-ACCESS_TOKEN_SECRET= //token secret jwt
-STRIPE_SECRET_KEY=//sk_test_key
+-DB_USER= //database user name
+-DB_PASS=//password
+-ACCESS_TOKEN_SECRET= //token secret jwt
+-STRIPE_SECRET_KEY=//sk_test_key
 Run the Server
 
 ```
