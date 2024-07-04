@@ -14,7 +14,7 @@ Welcome to the Hostel Meals Management System, a comprehensive platform designed
 
 ## Features of the Website
 
-- **Student Login**: Secure login for students using email and password, with options for social logins via Google and Facebook.
+- **Student Login**: Secure login for students using email and password, with options for social logins via Google.
 - **Meal Management**: Admins can add, update, or delete meals with detailed information, including images, descriptions, ingredients, and nutritional facts.
 - **Review System**: Students can review meals, providing ratings and comments to help others make informed choices.
 - **Search Functionality**: Advanced search based on all meal data, allowing users to find specific meals quickly.
