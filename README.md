@@ -57,7 +57,8 @@ Follow these steps to clone and run the Hostel Meals Management System locally:
 Clone the clint and server Repository
 
 ```
-git clone //<repository-url>
+git clone https://github.com/AmirHossain58/hostel-meals-management-system.git
+git clone https://github.com/AmirHossain58/hostel-meal-management-system-server.git
 cd //<repository-folder>
 ```
 Install Server Dependencies
